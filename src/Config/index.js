@@ -1,0 +1,37 @@
+export const Config = {
+  API_URL: 'http://157.230.183.30:3000/',
+
+  END_POINTS: {
+    LOGIN: 'login',
+    UPDATE_DRIVER_LOCATION: 'driver/update-location',
+    ACCEPT_RIDE: 'driver/accept-ride',
+    START_RIDE: 'driver/start-ride',
+    END_RIDE: 'driver/end-ride',
+    USERS: 'users',
+    CANCEL_RIDE: 'users/cancel-ride',
+    PURCHASE: 'purchase',
+    RESTAURANT: 'restaurant',
+    IMAGE: 'image',
+    RIDES: 'driver/rides'
+  },
+  SnackBarEnum: {
+    INFO: 'info',
+    SUCCESS: 'success',
+    ERROR: 'error',
+  },
+
+  ResponseCode: {
+    OK: 200,
+    CREATED: 201,
+    BAD_REQUEST: 400,
+    UNAUTHORIZED: 401,
+    FORBIDDEN: 403,
+    NOT_FOUND: 404,
+    METHOD_NOT_ALLOWED: 405,
+    UNPROCESSABLE_REQUEST: 422,
+    INTERNAL_SERVER_ERROR: 500,
+    TOKEN_INVALID: 503,
+    NO_INTERNET: 522,
+    BAD_GATEWAY: 502,
+  },
+}
