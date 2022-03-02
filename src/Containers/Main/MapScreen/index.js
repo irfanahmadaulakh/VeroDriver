@@ -101,7 +101,8 @@ const MapScreen = () => {
     }
     let params = {
       is_online : status,
-      has_ride_pool : "true"
+      has_ride_pool : 'true',
+      user_type: 'driver'
     }
     new APIRequest.Builder()
       .put()

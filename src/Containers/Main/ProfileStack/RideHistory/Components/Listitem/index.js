@@ -1,12 +1,12 @@
 //import liraries
 import React, { Component } from 'react'
-import { Text, StyleSheet, View } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
 import { Colors } from '@/Theme/Variables'
 import { WP } from '@/Theme/Responsive'
 import moment from 'moment' // create a component
 const ItemDetail = props => {
   console.log('In Qoute Item', props)
-  const {service_type, created_at} = props
+  const {service_type, created_at, status} = props
   const renderServiceName = () => {
 console.log('ride type = ' + service_type);
 if (service_type == 'pick_up') {
@@ -25,13 +25,30 @@ if (service_type == 'pick_up') {
   return <Text style={styles.text}>Undefined Service Type</Text>;
 }
   }
+
+  const getStatus = () =>{
+    if (status == 'ride_ended') {
+      return "Ride Ended"; 
+    } else if (status == 'ride_accepted') {
+      return "Ride Accepted"; 
+    } else if (status == 'ride_started') {
+      return "Ride Started";
+    } else if (status == 'ride_canceled') {
+      return "Ride Cancelled";
+    }else if (status == 'completed') {
+      return "Completed";
+    } else {
+      return "Undefined Status";
+    }
+  }
     
   // pressAction = () => navigate('Details', demo)
   return (
-   <View style={styles.container}>
+   <TouchableOpacity style={styles.container} onPress={()=>props.onPressItem(props)}>
    {renderServiceName()}
    <Text style={styles.text}>{`Time of Request: ${moment(created_at).format('MMMM Do YYYY')}`}</Text>
-   </View>
+   <Text style={styles.text}>{`Status: ${getStatus()}`}</Text>
+   </TouchableOpacity>
   )
 }
 

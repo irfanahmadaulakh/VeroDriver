@@ -43,10 +43,19 @@ const RideHistory = (props) => {
       .build()
       .doRequest()
   }
+  const rideStatus = (item) =>{
+      if(item.status == 'ride_accepted'){
+        navigate("RideScreen")
+      } else if (item.status == 'ride_started'){
+        navigate("RideToDestination")
+      } else {
+        navigate("RideDetails", item)
+      }
+  }
   return (
   <View style={Layout.fill}>
     <VeroHeader title={t("rideHistory")}/>
-    <ItemsList data={ridesData}/>
+    <ItemsList data={ridesData} onPressItem={(item)=>rideStatus(item)}/>
     {loading && <VeroLoader/>}
   </View>
      

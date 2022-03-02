@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Platform } from 'react-native';
 import { VeroProfileHeader }from '@/Components'
 import { navigate } from '@/Navigators/utils';
@@ -12,10 +12,26 @@ import { Config } from '@/Config';
 
 const Profile = () => {
   const token = useSelector(state => state.user.token)
+  const user = useSelector(state => state.user.user)
+  console.log("User", user);
   const { t } = useTranslation()
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [mobileNumber, setMobileNumber] = useState('')
+  const [email, setEmail] = useState('')
+  const [address, setAddress] = useState('')
   const { Layout, Gutters } =useTheme()
   const [pickedImage, setPickedImage]= useState()
   let imageUpload;
+
+  useEffect(()=>{
+    const {first_name, last_name, mobile_number, avatar, email, street_address} = user
+    setFirstName(first_name),
+    setLastName(last_name),
+    setMobileNumber(mobile_number),
+    setEmail(email),
+    setAddress(street_address)
+  },[])
 
   const uploadSelfie = () => {
     getCameraPicture(
@@ -67,18 +83,17 @@ const Profile = () => {
   return (
     <View style={Layout.fill}>
       <VeroProfileHeader
-          name={"James Smith"}
-          rating={"4.66"}
+          name={`${firstName} ${lastName}`}
           totalTrips={"5432"}
           years={"1.23"}
           picture={pickedImage}
           onPressCamera={uploadSelfie}
       />
         <Text style={Layout.helpText2}>{t("info").toUpperCase()}</Text>
-        <ProfileLineItem icon="phone-portrait-outline" text={'+1 983 392 2392'}/>
-        <ProfileLineItem icon="ios-mail-sharp" text={'irfan_driver@vero.com'}/>
+        <ProfileLineItem icon="phone-portrait-outline" text={mobileNumber}/>
+        <ProfileLineItem icon="ios-mail-sharp" text={email}/>
         <ProfileLineItem icon="language-outline" text={'English & Spanish'}/>
-        <ProfileLineItem icon="home-sharp" text={'RM6 NL, PO 2452, NY, USA'}/>
+        <ProfileLineItem icon="home-sharp" text={address}/>
       </View>
   );
 }

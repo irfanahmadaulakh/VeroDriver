@@ -1,18 +1,23 @@
 export const Config = {
-  API_URL: 'http://157.230.183.30:3000/',
+  // New APIs URL
+  API_URL: 'https://vero-1.herokuapp.com/api/v1/',
+  // Old APIs URL
+  // API_URL: 'http://157.230.183.30:3000/',
 
   END_POINTS: {
-    LOGIN: 'login',
+    LOGIN: 'auth/login', 
+    FORGOT: 'auth/forget-password', 
     UPDATE_DRIVER_LOCATION: 'driver/update-location',
-    ACCEPT_RIDE: 'driver/accept-ride',
-    START_RIDE: 'driver/start-ride',
+    ACCEPT_RIDE: 'driver/accept-ride', 
+    START_RIDE: 'driver/start-ride', 
     END_RIDE: 'driver/end-ride',
     USERS: 'users',
-    CANCEL_RIDE: 'users/cancel-ride',
+    CANCEL_RIDE: 'driver/cancel-ride',
     PURCHASE: 'purchase',
     RESTAURANT: 'restaurant',
     IMAGE: 'image',
-    RIDES: 'driver/rides'
+    RIDES: 'driver/rides',
+    SERVICE_TYPE: 'users/service-type'
   },
   SnackBarEnum: {
     INFO: 'info',

@@ -218,11 +218,16 @@ const RideScreen = (props) => {
       }
 
   }
-  useEffect(()=> {
-    setInterval(()=> {
-      updateMap()
-    }, 7000)
-  })
+    //===>> It works here..
+
+    
+  // useEffect(()=> {
+  //   setInterval(()=> {
+  //     updateMap()
+  //   }, 7000)
+  // })
+
+
   // useEffect(() => {
   //   const interval = setInterval(() => {
   //     updateMap()

@@ -9,33 +9,37 @@ import {VeroBackButton,
     } from '@/Components'
 import { useTranslation } from 'react-i18next'
 import { useTheme } from '@/Hooks'
-import { navigate } from '@/Navigators/utils';
-import { APIRequest } from '../../../Services/ApiRequest'
+import { APIRequest } from '@/Services/ApiRequest'
 import { Config } from '@/Config'
+import { goBack } from '@/Navigators/utils';
+import { VeroLoader } from '@/Components';
 
 
 const ForgotPassword = (props) => {
     console.log("Props here are", props)
     const { Layout, Colors, Fonts, Images } = useTheme()
     const { t } = useTranslation()
+    const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState()
 
 
     const submit = () => {
         let params = {
             email: email,
-            password: password,
           }
-        //   setLoading(true)
+          setLoading(true)
           new APIRequest.Builder()
             .post()
-            .reqURL(Config.END_POINTS.LOGIN)
+            .reqURL(Config.END_POINTS.FORGOT)
             .jsonParams(params)
             .response(response => {
               console.log("Response ", response);
+              setLoading(false)
+              goBack()
             })
             .error(error => {
               console.log('Showing error', error)
+              setLoading(false)
             })
             .build()
             .doRequest()
@@ -61,8 +65,9 @@ const ForgotPassword = (props) => {
       <VeroButton
           title={t("submit")}
           isDisabled={false}
-        //   onPress={submit}
+          onPress={submit}
       />
+        {loading && <VeroLoader/>}
       </View>
   )
 }

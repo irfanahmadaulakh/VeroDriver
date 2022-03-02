@@ -36,6 +36,8 @@ const TripNotification = (props) => {
     const [rideData, setRideData] = useState()
     const [restaurantDetails, setRestaurantDetails] = useState()
     const [puchasesDetails, setPurchasesDetails] = useState()
+    const [itemExchangeDetails, setItemExchangeDetails] = useState()
+    const [itemReturnDetails, setItemReturnDetails] = useState() 
     const [packageDetails, setPackageDetails] = useState()
     const [foodItems, setFoodItems] = useState()
     const [distance, setDistance] = useState()
@@ -80,29 +82,31 @@ const TripNotification = (props) => {
         .jsonParams()
         .response(response => {
           console.log("Response ", response),
-          setRideData(response?.data?.data),
-          restaurantID = response?.data?.data?.food_delivery?.restaurant_id,
-          setFoodItems(response?.data?.data?.food_delivery?.items),
-          setPurchasesDetails(response?.data?.data?.item_purchases),
-          setPackageDetails(response?.data?.data?.drop_of_packages?.items)
-          assignValues(response?.data?.data?.service_type),
+          setRideData(response?.data?.data?.data),
+          restaurantID = response?.data?.data?.data?.food_delivery?.restaurant_id,
+          setFoodItems(response?.data?.data?.data?.food_delivery?.items),
+          setPurchasesDetails(response?.data?.data?.data?.item_purchases),
+          setItemExchangeDetails(response?.data?.data?.data?.item_exchange)
+          setItemReturnDetails(response?.data?.data?.data?.item_return)
+          setPackageDetails(response?.data?.data?.data?.drop_of_packages?.items)
+          assignValues(response?.data?.data?.data?.service_type),
           calculateDistanceTime(
-            response?.data?.data?.pick_up_location?.coordinates[0],
-            response?.data?.data?.pick_up_location?.coordinates[1],
+            response?.data?.data?.data?.pick_up_location?.coordinates[0],
+            response?.data?.data?.data?.pick_up_location?.coordinates[1],
           )
           calculateDropOffDistanceTime(
-            response?.data?.data?.pick_up_location?.coordinates[0],
-            response?.data?.data?.pick_up_location?.coordinates[1],
-            response?.data?.data?.drop_of_location?.coordinates[0],
-            response?.data?.data?.drop_of_location?.coordinates[1],
+            response?.data?.data?.data?.pick_up_location?.coordinates[0],
+            response?.data?.data?.data?.pick_up_location?.coordinates[1],
+            response?.data?.data?.data?.drop_of_location?.coordinates[0],
+            response?.data?.data?.data?.drop_of_location?.coordinates[1],
           )
         setPickupCoordinates([{
-          latitude: response?.data?.data?.pick_up_location?.coordinates[0],
-          longitude: response?.data?.data?.pick_up_location?.coordinates[1],
+          latitude: response?.data?.data?.data?.pick_up_location?.coordinates[0],
+          longitude: response?.data?.data?.data?.pick_up_location?.coordinates[1],
         }]),
         setDropCoordinates([{
-          latitude: response?.data?.data?.drop_of_location?.coordinates[0],
-          longitude: response?.data?.data?.drop_of_location?.coordinates[1],
+          latitude: response?.data?.data?.data?.drop_of_location?.coordinates[0],
+          longitude: response?.data?.data?.data?.drop_of_location?.coordinates[1],
         }])
          })
         .error(error => {
@@ -187,6 +191,9 @@ const TripNotification = (props) => {
         dropLocation: dropCoordinates,
         restaurantDetails: restaurantDetails,
         itemPurchaseDetails: puchasesDetails,
+        itemExchangeDetails: itemExchangeDetails,
+        itemReturnDetails: itemReturnDetails,
+
       }
       dispatch(setRideDetails(data))
       let params= {

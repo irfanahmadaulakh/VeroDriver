@@ -17,7 +17,7 @@ const Settings = (props) => {
       <ScrollView>
       <View style={styles.settingsView}>
           <SettingsItems onPress={()=>navigate("Profile")} icon="person" text={t("myprofile")}/>
-          <SettingsItems icon="ios-car" text={t("myvehicle")}/>
+          <SettingsItems onPress={()=>navigate("MyVehicle")} icon="ios-car" text={t("myvehicle")}/>
           <SettingsItems icon="ios-document-text-sharp" text={t("personaldocument")}/>
           <SettingsItems icon="bank-outline" text={t("bankdetails")}/>
           <SettingsItems icon="ios-lock-closed" text={t("changepassword")}/>

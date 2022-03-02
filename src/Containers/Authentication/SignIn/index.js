@@ -50,7 +50,7 @@ const SignIn = (props) => {
              })
             .error(error => {
               console.log('Showing error', error),
-              showSnackBar(Config.SnackBarEnum.ERROR, error?.message ?? "Something went wrong! we are fixing it.")
+              showSnackBar(Config.SnackBarEnum.ERROR, error?.meta?.message ?? "Something went wrong! we are fixing it.")
               setLoading(false)
             })
             .build()

@@ -370,6 +370,11 @@ textNumbers: {
     marginTop: WP('6'),
     marginLeft: WP('6')
   },
+  switchServiceContainer: {
+    backgroundColor: Colors.white, 
+    flex: 1, 
+    marginTop: WP('1.5')
+  },
   helpText2: {
     fontSize: WP('4.5'),
     fontWeight: 'bold',

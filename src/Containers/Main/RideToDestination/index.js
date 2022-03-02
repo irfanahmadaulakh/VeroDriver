@@ -216,17 +216,21 @@ const RideToDestination = (props) => {
       }
 
   }
+  
   // useEffect(()=> {
   //   setInterval(()=> {
   //     updateMap()
   //   }, 7000)
   // })
-  useEffect(() => {
-    const interval = setInterval(() => {
-      updateMap()
-  }, 7000);
-    return () => clearInterval(interval);
-  }, [])
+
+  //===>> It works here..
+  
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     updateMap()
+  // }, 7000);
+  //   return () => clearInterval(interval);
+  // }, [])
 
   const updateMap = async () => {
     console.log('control in update map');

@@ -5,14 +5,14 @@ import ItemDetail from '../Listitem'
 // create a component
 const ItemsList = props => {
   console.log("Showing item in list", props?.data)
-  const renderItem = ({ item }) => (    
+  const renderItem = ({ item }) => (   
+    console.log("jshdkahskjd", item),
     <ItemDetail
       onPressItem={props?.onPressItem}
-      status={item.status}
-      is_active={item.is_active}
-      service_type={item.service_type} 
-      created_at={item.created_at}
-      ride={item}
+      car_type={item.car_type}
+      car_color={item.car_color}
+      car_make={item.car_make} 
+      car_no={item.car_no}
     />
   )
   return (

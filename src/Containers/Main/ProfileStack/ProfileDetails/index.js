@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, ScrollView } from 'react-native';
 import ProfileHeader from './Components/ProfileHeader'
 import { useTranslation } from 'react-i18next'
@@ -12,9 +12,20 @@ import { navigate } from '@/Navigators/utils';
 
 const ProfileDetails = (props) => {
   const user_id = useSelector(state => state.user.user_id)
+  const user = useSelector(state => state.user.user)
   const { t } = useTranslation()
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [rating, setRating] = useState('')
   const { Layout, Gutters } = useTheme()
   const dispatch = useDispatch()
+
+  useEffect(()=>{
+    const {first_name, last_name, rating, avatar} = user
+    setFirstName(first_name)
+    setLastName(last_name),
+    setRating(rating)
+  },[])
 
 
   const logout = ()=>{
@@ -28,15 +39,16 @@ const ProfileDetails = (props) => {
   }
   const pressSettings = ()=> navigate('Settings')
   const pressRideHistory = ()=> navigate('RideHistory')
+  const pressSwitchService = ()=> navigate('SwitchService')
   return (
     <View style={Layout.fill}>
       <ProfileHeader
-        name={"James Smith"}
-        rating={"4.66"}
+        name={`${firstName} ${lastName}`}
+        rating={`${rating}`}
         totalTrips={"5432"}
         years={"1.23"}
       />
-      <SwitchService/>
+      <SwitchService onPress={pressSwitchService}/>
       <ScrollView>
       <SettingsItems icon="home-sharp" text={t("home")}/>
       <SettingsItems onPress={pressRideHistory} icon="md-car-outline" text={t("rideHistory")}/>
