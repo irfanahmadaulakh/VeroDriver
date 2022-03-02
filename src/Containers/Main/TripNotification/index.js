@@ -193,7 +193,6 @@ const TripNotification = (props) => {
         itemPurchaseDetails: puchasesDetails,
         itemExchangeDetails: itemExchangeDetails,
         itemReturnDetails: itemReturnDetails,
-
       }
       dispatch(setRideDetails(data))
       let params= {
@@ -212,6 +211,8 @@ const TripNotification = (props) => {
           findFinalPackagesList()
         } else if (serviceType == "PackagePickup/Delivery"){
           findFinalPackagesList()
+        } else if (serviceType == "Item Exchange"){
+          findFinalExchangeList()
         }
         navigate("RideScreen")
         })
@@ -304,6 +305,19 @@ const TripNotification = (props) => {
           item_type: item?.item_type,
           item_weight: item?.item_weight,
           size: item?.size,
+        }
+        FoodData.push(itemFinalList)
+      })
+      console.log("Final Foods List", FoodData);
+      dispatch(setItemDetails(FoodData))
+    }
+    const findFinalExchangeList = ()=>{
+      const itemsList = itemReturnDetails?.items
+      itemsList.map((item)=>{
+        let itemFinalList = {
+          reciept_image: item?.reciept_image,
+          item_image: item?.item_image,
+          details: item?.details,
         }
         FoodData.push(itemFinalList)
       })

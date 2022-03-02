@@ -15,6 +15,7 @@ export default function () {
     location: require('@/Assets/Images/location.png'),
     earnings: require('@/Assets/Images/earnings.png'),
     wallet: require('@/Assets/Images/wallet.png'),
+    carTaxi: require('@/Assets/Images/car_taxi.png'),
 
 
   }

@@ -44,13 +44,13 @@ const RideHistory = (props) => {
       .doRequest()
   }
   const rideStatus = (item) =>{
-      if(item.status == 'ride_accepted'){
-        navigate("RideScreen")
-      } else if (item.status == 'ride_started'){
-        navigate("RideToDestination")
-      } else {
+      // if(item.status == 'ride_accepted'){
+      //   navigate("RideScreen")
+      // } else if (item.status == 'ride_started'){
+      //   navigate("RideToDestination")
+      // } else {
         navigate("RideDetails", item)
-      }
+      // }
   }
   return (
   <View style={Layout.fill}>

@@ -23,7 +23,9 @@ import FoodItemModal from './Components/FoodItemsModal';
 import TopHeaderPurchase from './Components/TopHeaderPurchase';
 import ItemsPurchaseModal from './Components/ItemsPurchaseModal';
 import TopHeaderPickup from './Components/TopHeaderPickup';
+import TopHeaderExchange from './Components/TopHeaderExchange';
 import PackagePickupModal from './Components/PackagePickupModal';
+import ExchangeReturnModal from './Components/ExchangeReturnModal';
 
 // import database from '@react-native-firebase/database';
 
@@ -74,6 +76,7 @@ const RideScreen = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [itemModalVisible, setItemModalVisible] = useState(false);
   const [packageModalVisible, setPackageModalVisible] = useState(false);
+  const [exchangeModalVisible, setExchangeModalVisible] = useState(false);
   const [itemsData, setItemsData] = useState([])
 
   const [startCoordinate, setStartCoordinates] = useState([])
@@ -432,7 +435,19 @@ const RideScreen = (props) => {
         pickupFrom={pickupFrom}
         status={statusIs}
       />
-      : 
+      : serviceType == "Item Exchange" || serviceType == "Item Return" ? 
+      <TopHeaderExchange
+        data={ItemDetails}
+        onPressStart={startTrip}
+        onPressItem={(item)=> {
+          setItemsData(item),
+          console.log("Item is",item)
+          setExchangeModalVisible(true)
+          }}
+        serviceType={serviceType}
+        pickupFrom={pickupFrom}
+        status={statusIs}
+      /> :
        <TopHeader
         onPressStart={startTrip}
         name={passenger}
@@ -529,6 +544,16 @@ const RideScreen = (props) => {
               visible={packageModalVisible}
               onRequestClose={() => {
                 setPackageModalVisible(!packageModalVisible);
+              }}
+          />
+          <ExchangeReturnModal
+              onPressCross={()=> setExchangeModalVisible(!exchangeModalVisible)}
+              data={itemsData && itemsData}
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                setExchangeModalVisible(!exchangeModalVisible);
               }}
           />
   </View>
