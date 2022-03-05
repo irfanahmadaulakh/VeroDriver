@@ -312,7 +312,7 @@ const TripNotification = (props) => {
       dispatch(setItemDetails(FoodData))
     }
     const findFinalExchangeList = ()=>{
-      const itemsList = itemReturnDetails?.items
+      const itemsList = itemExchangeDetails?.items
       itemsList.map((item)=>{
         let itemFinalList = {
           reciept_image: item?.reciept_image,

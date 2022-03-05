@@ -7,6 +7,7 @@ export default {
   rideHistory: 'Ride History',
   rideDetails: 'Ride Details',
   enterAmount: 'Enter Purchase Amount',
+  enterAmountReturn: 'Enter Exchange Amount',
   summary: "Summary",
   subscription: 'My Subscription',
   notification: 'Notification',

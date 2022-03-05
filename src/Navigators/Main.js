@@ -5,6 +5,7 @@ import RideScreen from '../Containers/Main/RideScreen'
 import TripNotification from '../Containers/Main/TripNotification'
 import RideToDestination from '../Containers/Main/RideToDestination'
 import ProfileStack from '../Containers/Main/ProfileStack'
+import RideToPickup from '../Containers/Main/RideToPickup'
 
 const Stack = createStackNavigator()
 
@@ -15,6 +16,7 @@ const MainNavigator = () => {
       <Stack.Screen name="MapScreen" component={MapScreen} />
       <Stack.Screen name="RideScreen" component={RideScreen} />
       <Stack.Screen name="RideToDestination" component={RideToDestination} />
+      <Stack.Screen name="RideToPickup" component={RideToPickup} />
       <Stack.Screen name="ProfileStack" component={ProfileStack} />
       <Stack.Screen name="TripNotification" component={TripNotification} />
 

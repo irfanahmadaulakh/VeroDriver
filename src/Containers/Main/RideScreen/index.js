@@ -76,9 +76,8 @@ const RideScreen = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [itemModalVisible, setItemModalVisible] = useState(false);
   const [packageModalVisible, setPackageModalVisible] = useState(false);
-  const [exchangeModalVisible, setExchangeModalVisible] = useState(false);
   const [itemsData, setItemsData] = useState([])
-
+  const [exchangeModalVisible, setExchangeModalVisible] = useState(false);
   const [startCoordinate, setStartCoordinates] = useState([])
 
   const { width, height } = Dimensions.get('screen');
@@ -475,22 +474,26 @@ const RideScreen = (props) => {
               ref={mapRef}
               onPanDrag={dragMap}
               >
-              {coordinates.map((coordinate, index) => (
+              {coordinates && coordinates.map((coordinate, index) => (
                 <MapView.Marker.Animated
                   key={`coordinate_${index}`}
                   onLoad={() => forceUpdate()}
                   coordinate={coordinates[0]}>
+                  {console.log("coordinates in 1st marker, ", coordinates[0])}
                     <Icon name="map-marker" size={30} color={Colors.black}  />
                 </MapView.Marker.Animated>
               ))}
-              <MapView.Marker.Animated
+              {startCoordinate &&
+                <MapView.Marker.Animated
                coordinate={startCoordinate}
                 onLoad={() => forceUpdate()}
                 flat={true}
                 ref={markerRef}
                 >
+                {console.log("coordinates in 2nd marker, ", startCoordinate)}
                 <Icon name="location-arrow" size={30} color={Colors.orange}  />
               </MapView.Marker.Animated>
+              }
               {coordinates.length >= 2 && (
                 <MapViewDirections
                   origin={coordinates[1]}
@@ -551,7 +554,7 @@ const RideScreen = (props) => {
               data={itemsData && itemsData}
               animationType="slide"
               transparent={true}
-              visible={modalVisible}
+              visible={exchangeModalVisible}
               onRequestClose={() => {
                 setExchangeModalVisible(!exchangeModalVisible);
               }}

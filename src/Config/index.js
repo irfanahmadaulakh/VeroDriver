@@ -11,6 +11,7 @@ export const Config = {
     ACCEPT_RIDE: 'driver/accept-ride', 
     START_RIDE: 'driver/start-ride', 
     END_RIDE: 'driver/end-ride',
+    ARRIVE_RIDE: 'driver/arrive-ride',
     USERS: 'users',
     CANCEL_RIDE: 'driver/cancel-ride',
     PURCHASE: 'purchase',

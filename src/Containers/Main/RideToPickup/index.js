@@ -12,18 +12,14 @@ import { Config } from '@/Config'
 import { Colors } from '@/Theme/Variables'
 import MapViewDirections from 'react-native-maps-directions';
 import { useDispatch, useSelector } from 'react-redux'
-import { VeroHeader } from '../../../Components';
-import TopHeader from './Components/TopHeader';
+import { VeroHeader } from '@/Components';
 import { useTranslation } from 'react-i18next'
 import { useTheme } from '@/Hooks';
 import { firebase } from '@/Services/FirebaseConfig';
 import FullScreenHeader from './Components/FullScreenHeader';
-import TopHeaderFood from './Components/TopHeaderFood';
 import { getCameraPicture } from '@/Services/Helpers'
-import TopHeaderPickup from './Components/TopHeaderPickup';
 import SignatureModal from './Components/SignatureModal';
 import TopHeaderExchange from './Components/TopHeaderExchange';
-import ExchangeReturnModal from './Components/ExchangeReturnModal';
 
 
 // import database from '@react-native-firebase/database';
@@ -31,7 +27,7 @@ import ExchangeReturnModal from './Components/ExchangeReturnModal';
 const db = firebase.database()
 let imageUpload;
 
-const RideToDestination = (props) => {
+const RideToPickup = (props) => {
 
   const mapRef = useRef(null);
   const markerRef = useRef(null);
@@ -39,8 +35,6 @@ const RideToDestination = (props) => {
   const ride = useSelector(state => state.user.rideDetails)
   const purchase_id = useSelector(state => state.user.purchase_id)
   const token = useSelector(state => state.user.token)
-  const ItemDetails = useSelector(state => state.user.itemDetails)
-
 
   const { name, pickup, service, status, pickupLocation, dropLocation, dropOff} = ride
   console.log("Ride detail here are", ride);
@@ -80,9 +74,6 @@ const RideToDestination = (props) => {
   const [startCoordinate, setStartCoordinates] = useState([])
   const [amount, setAmount] = useState()
   const [modalVisible, setModalVisible] = useState(false)
-  const [itemsData, setItemsData] = useState([])
-  const [exchangeModalVisible, setExchangeModalVisible] = useState(false);
-
   const { width, height } = Dimensions.get('screen');
 
   const [driverLocation, setDriverLocation] = useState({
@@ -113,8 +104,8 @@ const RideToDestination = (props) => {
           // console.log('position watching in Ride Screen', pickupLocation[0].latitude)
           setCoordinates([
             {
-              latitude: dropLocation[0]?.latitude,
-              longitude: dropLocation[0]?.longitude,
+              latitude: pickupLocation[0]?.latitude,
+              longitude: pickupLocation[0]?.longitude,
             },
             {
               latitude: position?.coords?.latitude,
@@ -257,8 +248,8 @@ const RideToDestination = (props) => {
           setDLongitude(position?.coords?.longitude),
           setCoordinates([
             {
-              latitude: dropLocation[0]?.latitude,
-              longitude: dropLocation[0]?.longitude,
+              latitude: pickupLocation[0]?.latitude,
+              longitude: pickupLocation[0]?.longitude,
             },
             {
               latitude: position?.coords?.latitude,
@@ -336,7 +327,7 @@ const RideToDestination = (props) => {
     axios({
       method: 'post',
       url:
-        'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=' + latitude + ',%20' + longitude + '&destinations=' + dropLocation[0]?.latitude + ',%20' + dropLocation[0]?.longitude + '&key=AIzaSyC6Vo_6ohnkLyGIw2IPmZka0TarRaeWJ2g',
+        'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=' + latitude + ',%20' + longitude + '&destinations=' + pickupLocation[0]?.latitude + ',%20' + pickupLocation[0]?.longitude + '&key=AIzaSyC6Vo_6ohnkLyGIw2IPmZka0TarRaeWJ2g',
     })
       .then(function (response) {
         console.log('maps.googleapis.com response: ', response?.data);
@@ -382,26 +373,7 @@ const RideToDestination = (props) => {
     .jsonParams(params)
     .response(response => {
       console.log("Response ", response)
-      props.navigation.pop(3)
-     })
-    .error(error => {
-      console.log('Showing error', error)
-    })
-    .build()
-    .doRequest()
-  }
-
-  const arriveTrip = () => {
-    let params = {
-      purchase_id: purchase_id
-    }
-    new APIRequest.Builder()
-    .post()
-    .reqURL(Config.END_POINTS.ARRIVE_RIDE)
-    .jsonParams(params)
-    .response(response => {
-      console.log("Response ", response)
-      navigate("RideToPickup")
+      props.navigation.pop(4)
      })
     .error(error => {
       console.log('Showing error', error)
@@ -443,7 +415,7 @@ const RideToDestination = (props) => {
     console.log("In picture validation");
     if(pickedImage == null || pickedImageDelivery == null || amount == null){
       console.log("In true");
-      alert("Enter required information (Receipt Picture, Delivery Proof, Purchase Amount)")
+      alert("Enter required information (Digital Signature, Delivery Proof, Purchase Amount)")
     } else {
       console.log("In else");
       endTrip()
@@ -500,51 +472,18 @@ const RideToDestination = (props) => {
     {headers && 
       <>
       <VeroHeader title="Ride to Destination"/>
-      {serviceType == "Food Delivery" || serviceType == "Item Purchase" ? 
-      <TopHeaderFood
-          onPressReceipt={receiptPicture}
-          onPressPicture={deliveryPicture}
-          receiptImage={pickedImage}
-          deliveryImage={pickedImageDelivery}
-          value={amount}
-          onChangeText={text => setAmount(text)}
-          onPressEnd={pictureValidation}
-          serviceType={serviceType}
-          pickupFrom={dropOff}
-          status={statusIs}
-      /> : serviceType == "PackagePickup/Delivery" ? 
-      <TopHeaderPickup
+      <TopHeaderExchange
           onPressSignature={()=> setModalVisible(true)}
           onPressPicture={deliveryPicture}
           signatureImage={pickedImage}
           deliveryImage={pickedImageDelivery}
           value={amount}
           onChangeText={text => setAmount(text)}
-          onPressEnd={endTrip}
+          onPressEnd={pictureValidation}
           serviceType={serviceType}
-          pickupFrom={dropOff}
+          pickupFrom={pickup}
           status={statusIs}
-      /> : serviceType == "Item Exchange" || serviceType == "Item Return" ? 
-      <TopHeaderExchange
-        data={ItemDetails}
-        onPressArrive={arriveTrip}
-        onPressItem={(item)=> {
-          setItemsData(item),
-          console.log("Item is",item)
-          setExchangeModalVisible(true)
-          }}
-        serviceType={serviceType}
-        pickupFrom={dropOff}
-        status={statusIs}
-      />:
-      <TopHeader
-        onPressEnd={endTrip}
-        name={passenger}
-        serviceType={serviceType}
-        pickupFrom={dropOff}
-        status={statusIs}
-     />
-      }
+      />
       </>
       }
         <View style={Layout.fill}>
@@ -615,20 +554,10 @@ const RideToDestination = (props) => {
                 setModalVisible(!modalVisible);
               }}
           />
-          <ExchangeReturnModal
-              onPressCross={()=> setExchangeModalVisible(!exchangeModalVisible)}
-              data={itemsData && itemsData}
-              animationType="slide"
-              transparent={true}
-              visible={exchangeModalVisible}
-              onRequestClose={() => {
-                setExchangeModalVisible(!exchangeModalVisible);
-              }}
-          />
   </View>
   </View>
   );
 }
    
 
-export default RideToDestination;
+export default RideToPickup;

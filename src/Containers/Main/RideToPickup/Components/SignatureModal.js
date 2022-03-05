@@ -4,14 +4,11 @@ import { WP } from "@/Theme/Responsive";
 import { Colors } from "@/Theme/Variables";
 import Icon from 'react-native-vector-icons/Entypo'
 import { useTheme } from '@/Hooks'
+import DigitalSignature from "./DigitalSignature";
 
 
-const ExchangeReturnModal = (props) => {
-    console.log("Food data", props);
-    const { reciept_image, item_image, details} = props?.data
+const SignatureModal = (props) => {
     const { Layout, Images, Colors } = useTheme()
-
-    
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -22,11 +19,10 @@ const ExchangeReturnModal = (props) => {
           <TouchableOpacity onPress={props.onPressCross} style={{position: 'absolute', top: WP('4'), right: WP('4')}}>
           <Icon name="circle-with-cross" size={30} color={"#000000"}/>
           </TouchableOpacity>
-            <Text style={styles.modalText}>{name}</Text>
-            <Image style={styles.image} source={{ uri: reciept_image}}/>
-            <Image style={styles.image} source={{ uri: item_image}}/>
-
-            <Text style={styles.description}>{`Details:  ${details}`}</Text>
+            <DigitalSignature
+                onPressSave={props.onPressSave}
+                signatureSaved={props.signatureSaved}
+            />
           </View>
         </View>
       </Modal>
@@ -49,7 +45,7 @@ const styles = StyleSheet.create({
     width: WP('90'),
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    height: WP('90'),
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -62,7 +58,6 @@ const styles = StyleSheet.create({
   image: {
     width: WP('50'), 
     height: WP('50'),
-    marginTop: WP('1'),
     borderRadius: WP('4')
   },
   modalText: {
@@ -74,9 +69,8 @@ const styles = StyleSheet.create({
   description: {
     fontSize: WP('4'),
     fontWeight: 'bold',
-    marginTop: WP('2'),
     textAlign: "center"
   }
 });
 
-export default ExchangeReturnModal;
+export default SignatureModal;
