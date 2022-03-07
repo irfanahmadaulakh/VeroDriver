@@ -88,6 +88,7 @@ const Profile = () => {
           years={"1.23"}
           picture={pickedImage}
           onPressCamera={uploadSelfie}
+          onEditPress={()=>navigate("EditProfile")}
       />
         <Text style={Layout.helpText2}>{t("info").toUpperCase()}</Text>
         <ProfileLineItem icon="phone-portrait-outline" text={mobileNumber}/>

@@ -7,6 +7,7 @@ import RideHistory from './RideHistory'
 import SwitchService from './SwitchService'
 import MyVehicle from './MyVehicle'
 import RideDetails from './RideDetails'
+import EditProfile from './EditProfile'
 
 const Stack = createStackNavigator()
 
@@ -21,6 +22,8 @@ const ProfileStack = () => {
       <Stack.Screen name="RideDetails" component={RideDetails} />
       <Stack.Screen name="MyVehicle" component={MyVehicle} />
       <Stack.Screen name="SwitchService" component={SwitchService} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
+
 
 
     </Stack.Navigator>
