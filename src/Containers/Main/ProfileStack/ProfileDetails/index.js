@@ -40,10 +40,12 @@ const ProfileDetails = (props) => {
   const pressSettings = ()=> navigate('Settings')
   const pressRideHistory = ()=> navigate('RideHistory')
   const pressSwitchService = ()=> navigate('SwitchService')
+  const pressSummary = ()=> navigate("Summary")
   return (
     <View style={Layout.fill}>
       <ProfileHeader
         name={`${firstName} ${lastName}`}
+        onPressEarning={()=>navigate("Earnings")}
         rating={`${rating}`}
         totalTrips={"5432"}
         years={"1.23"}
@@ -52,7 +54,7 @@ const ProfileDetails = (props) => {
       <ScrollView>
       <SettingsItems icon="home-sharp" text={t("home")}/>
       <SettingsItems onPress={pressRideHistory} icon="md-car-outline" text={t("rideHistory")}/>
-      <SettingsItems icon="ios-document-text-outline" text={t("summary")}/>
+      <SettingsItems onPress={pressSummary} icon="ios-document-text-outline" text={t("summary")}/>
       <SettingsItems icon="star" text={t("subscription")}/>
       <SettingsItems icon="notifications-sharp" text={t("notification")}/>
       <SettingsItems onPress={pressSettings} icon="settings-sharp" text={t("settings")}/>

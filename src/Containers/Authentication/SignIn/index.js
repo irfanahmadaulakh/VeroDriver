@@ -22,8 +22,8 @@ const SignIn = (props) => {
     console.log("Props here are", props)
     const { Layout, Colors, Fonts, Images } = useTheme()
     const { t } = useTranslation()
-    const [email, setEmail] = useState('irfan_driver@vero.com')
-    const [password, setPassword] = useState('Karachi123')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
 
     const dispatch = useDispatch()

@@ -398,6 +398,8 @@ const RideScreen = (props) => {
       <VeroHeader title="Ride to Pickup"/>
       {serviceType == "Food Delivery" ?
       <TopHeaderFood
+        onPressMessage={()=>navigate("ChatScreen")}
+        onPressCall={()=>console.warn("You can't make call")}
         data={ItemDetails}
         onPressStart={startTrip}
         onPressItem={(item)=> {
@@ -410,6 +412,8 @@ const RideScreen = (props) => {
         status={statusIs}
       /> : serviceType == "Item Purchase" ? 
       <TopHeaderPurchase
+        onPressMessage={()=>navigate("ChatScreen")}
+        onPressCall={()=>console.warn("You can't make call")}
         data={ItemDetails}
         onPressStart={startTrip}
         onPressItem={(item)=> {
@@ -423,6 +427,8 @@ const RideScreen = (props) => {
       />
       : serviceType == "PackagePickup/Delivery" ? 
       <TopHeaderPickup
+        onPressMessage={()=>navigate("ChatScreen")}
+        onPressCall={()=>console.warn("You can't make call")}
         data={ItemDetails}
         onPressStart={startTrip}
         onPressItem={(item)=> {
@@ -436,6 +442,8 @@ const RideScreen = (props) => {
       />
       : serviceType == "Item Exchange" || serviceType == "Item Return" ? 
       <TopHeaderExchange
+        onPressMessage={()=>navigate("ChatScreen")}
+        onPressCall={()=>console.warn("You can't make call")}
         data={ItemDetails}
         onPressStart={startTrip}
         onPressItem={(item)=> {
@@ -448,6 +456,8 @@ const RideScreen = (props) => {
         status={statusIs}
       /> :
        <TopHeader
+        onPressMessage={()=>navigate("ChatScreen")}
+        onPressCall={()=>console.warn("You can't make call")}
         onPressStart={startTrip}
         name={passenger}
         serviceType={serviceType}

@@ -18,6 +18,7 @@ export const Config = {
     RESTAURANT: 'restaurant',
     IMAGE: 'image',
     RIDES: 'driver/rides',
+    UPLOAD_FILES: 'files/temp-files',
     SERVICE_TYPE: 'users/service-type'
   },
   SnackBarEnum: {

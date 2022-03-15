@@ -63,7 +63,7 @@ const Profile = () => {
     //use axios to POST
     await axios({
         method: 'POST',
-        url: Config.API_URL + Config.END_POINTS.IMAGE,
+        url: Config.API_URL + Config.END_POINTS.UPLOAD_FILES,
         data: formData,
         config: {
           headers: {

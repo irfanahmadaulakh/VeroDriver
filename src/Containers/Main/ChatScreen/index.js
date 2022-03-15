@@ -10,7 +10,7 @@ import { Colors } from '@/Theme/Variables'
 import { APIRequest } from '@/Services/ApiRequest'
 import { Config } from '@/Config'
 import {  useSelector } from 'react-redux'
-// import database from '@react-native-firebase/database'
+import database from '@react-native-firebase/database'
 import { VeroHeader } from '@/Components'
 
 const ChatScreen = props => {
@@ -45,16 +45,19 @@ const ChatScreen = props => {
     setLoading(true)
   }
 
-//   useEffect(()=>{
-//     if(loading){
-//       database().ref(`/MESSAGE_THREADS/${params._id}`)
-//       .update({
-//        messages:messages
-//       },
-//       )
-//     }
-//     setLoading(false)
-//   }, [loading && messages])
+  useEffect(()=>{
+    if(loading){
+      database().ref().child('purchases_location').once('value', (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+          console.log("Chat is sentt", childSnapshot.val())
+        })
+      }
+      // .update({
+      //  messages:messages
+      // },
+      )}
+    setLoading(false)
+  }, [loading && messages])
 
 
   
@@ -110,6 +113,7 @@ const ChatScreen = props => {
         //   _id: user?.id,
         // }}
       />
+      <View style={styles.chatMargin}></View>
     </View>
   )
 }
@@ -144,6 +148,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  chatMargin: {
+    marginBottom: WP('3'),
+  }
 })
 
 export default ChatScreen

@@ -28,7 +28,7 @@ const ProfileHeader = (props) => {
                 </View>
                 <View style={styles.logosArrange}>
                     <View>
-                        <TouchableOpacity style={styles.iconContainer}>
+                        <TouchableOpacity style={styles.iconContainer} onPress={props.onPressEarning}>
                         <Image source={Images.earnings} style={styles.iconImage}/>
                         </TouchableOpacity>
                         <Text style={styles.textProfile}>Earnings</Text>

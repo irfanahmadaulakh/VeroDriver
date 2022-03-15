@@ -19,9 +19,19 @@ const { Layout, Images, Colors, Gutters } = useTheme()
   return (
   <View style={styles.requestHeader}>
   {/* <View style={Gutters.largeTMargin}> */}
-  <VeroButton style={{width: WP('82'), marginBottom: WP('2')}} title="Start Trip"
+
+  <View style={{flexDirection: 'row', justifyContent: 'space-evenly', marginBottom: WP('2')}}>
+  <VeroButton style={{width: WP('60')}} title="Start Trip"
   onPress={props?.onPressStart}
  />
+ <TouchableOpacity onPress={props?.onPressMessage} style={{marginTop: WP('5')}}>
+   <Icon name="chatbox-ellipses-sharp" size={30} color={"#000000"}/>
+   </TouchableOpacity>
+   <View style={styles.verticalDivider}></View>
+  <TouchableOpacity onPress={props?.onPressCall} style={{marginTop: WP('5')}}>
+  <Icon name="ios-call" size={28} color={"#000000"}/>
+  </TouchableOpacity>
+ </View>
   <Text style={styles.text}>{name}</Text>
   <View style={styles.divider}></View>
     <Text style={styles.dimedText}>{t("pickupFrom")}</Text>

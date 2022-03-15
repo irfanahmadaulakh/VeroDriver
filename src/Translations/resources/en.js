@@ -29,6 +29,7 @@ export default {
   about: 'About',
   contactUs: 'Contact us',
   help: "Help",
+  earning: "Earning",
   info: "personal info",
   tripTitle: 'Trip Notification',
   trips: "Total Trips", 

@@ -502,6 +502,8 @@ const RideToDestination = (props) => {
       <VeroHeader title="Ride to Destination"/>
       {serviceType == "Food Delivery" || serviceType == "Item Purchase" ? 
       <TopHeaderFood
+          onPressMessage={()=>navigate("ChatScreen")}
+          onPressCall={()=>console.warn("You can't make call")}
           onPressReceipt={receiptPicture}
           onPressPicture={deliveryPicture}
           receiptImage={pickedImage}
@@ -514,6 +516,8 @@ const RideToDestination = (props) => {
           status={statusIs}
       /> : serviceType == "PackagePickup/Delivery" ? 
       <TopHeaderPickup
+          onPressMessage={()=>navigate("ChatScreen")}
+          onPressCall={()=>console.warn("You can't make call")}
           onPressSignature={()=> setModalVisible(true)}
           onPressPicture={deliveryPicture}
           signatureImage={pickedImage}
@@ -526,6 +530,8 @@ const RideToDestination = (props) => {
           status={statusIs}
       /> : serviceType == "Item Exchange" || serviceType == "Item Return" ? 
       <TopHeaderExchange
+        onPressMessage={()=>navigate("ChatScreen")}
+        onPressCall={()=>console.warn("You can't make call")}
         data={ItemDetails}
         onPressArrive={arriveTrip}
         onPressItem={(item)=> {
@@ -538,6 +544,8 @@ const RideToDestination = (props) => {
         status={statusIs}
       />:
       <TopHeader
+        onPressMessage={()=>navigate("ChatScreen")}
+        onPressCall={()=>console.warn("You can't make call")}
         onPressEnd={endTrip}
         name={passenger}
         serviceType={serviceType}

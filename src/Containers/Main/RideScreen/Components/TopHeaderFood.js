@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { VeroButton } from '@/Components';
 import { WP } from '@/Theme/Responsive';
 import { Colors } from '@/Theme/Variables'
+import Icon from 'react-native-vector-icons/Ionicons'
 import ItemsList from './FoodItemsModal/Components/List'
 import { List } from 'react-native-paper';
 
@@ -18,9 +19,18 @@ const { Layout, Images, Colors, Gutters } = useTheme()
   <View style={styles.requestHeader}>
   <ScrollView>
   {/* <View style={Gutters.largeTMargin}> */}
-  <VeroButton style={{width: WP('82')}} title="Start Trip"
+  <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+  <VeroButton style={{width: WP('60')}} title="Start Trip"
   onPress={props?.onPressStart}
  />
+ <TouchableOpacity onPress={props?.onPressMessage} style={{marginTop: WP('5')}}>
+   <Icon name="chatbox-ellipses-sharp" size={30} color={"#000000"}/>
+   </TouchableOpacity>
+   <View style={styles.verticalDivider}></View>
+  <TouchableOpacity onPress={props?.onPressCall} style={{marginTop: WP('5')}}>
+  <Icon name="ios-call" size={28} color={"#000000"}/>
+  </TouchableOpacity>
+ </View>
  <View style={{padding: WP('4')}}>
     <Text style={styles.dimedText}>{t("pickupFood")}</Text>
 <Text style={styles.text}>{pickupFrom}</Text>
@@ -88,6 +98,12 @@ const styles=StyleSheet.create({
               width:WP('100'),
               backgroundColor: Colors.white,
           },
+          verticalDivider: {
+            borderWidth: WP(0.1),
+            height: WP('10'),
+            borderColor: 'black',
+            marginTop: WP('3.5')
+          }
 })
 
 export default TopHeaderFood;

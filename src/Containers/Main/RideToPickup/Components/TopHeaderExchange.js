@@ -1,6 +1,5 @@
 import React , { useState }from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons'
 import { useTheme } from '@/Hooks'
 import { goBack } from '../Navigators/utils'
 import { useTranslation } from 'react-i18next'
@@ -23,9 +22,18 @@ const {signatureImage, deliveryImage } = props
   return (
   <View style={styles.requestHeader}>
   {/* <View style={Gutters.largeTMargin}> */}
-  <VeroButton style={{width: WP('82'), marginBottom: WP('2')}} title="End Trip"
+  <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+  <VeroButton style={{width: WP('60'), marginBottom: WP('2')}} title="End Trip"
   onPress={props?.onPressEnd}
  />
+ <TouchableOpacity onPress={props?.onPressMessage} style={{marginTop: WP('5')}}>
+   <Ionicon name="chatbox-ellipses-sharp" size={30} color={"#000000"}/>
+   </TouchableOpacity>
+   <View style={styles.verticalDivider}></View>
+  <TouchableOpacity onPress={props?.onPressCall} style={{marginTop: WP('5')}}>
+  <Ionicon name="ios-call" size={28} color={"#000000"}/>
+  </TouchableOpacity>
+  </View>
   <Text style={styles.dimedText}>Dropoff Address</Text>
   <Text style={styles.text}>{pickupFrom}</Text>
   <View style={styles.divider}></View>
@@ -129,6 +137,12 @@ const styles=StyleSheet.create({
             width: WP('40'), 
             height: WP('40'),
             borderRadius: WP('3')
+          },
+          verticalDivider: {
+            borderWidth: WP(0.1),
+            height: WP('10'),
+            borderColor: 'black',
+            marginTop: WP('3.5')
           }
 })
 

@@ -473,6 +473,8 @@ const RideToPickup = (props) => {
       <>
       <VeroHeader title="Ride to Destination"/>
       <TopHeaderExchange
+          onPressMessage={()=>navigate("ChatScreen")}
+          onPressCall={()=>console.warn("You can't make call")}
           onPressSignature={()=> setModalVisible(true)}
           onPressPicture={deliveryPicture}
           signatureImage={pickedImage}

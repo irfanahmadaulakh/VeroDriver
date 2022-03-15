@@ -6,16 +6,19 @@ import { VeroHeader } from '@/Components';
 import { Colors } from '@/Theme/Variables';
 import { WP } from '@/Theme/Responsive';
 import { VeroTextInput, VeroButton } from '@/Components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { APIRequest } from '@/Services/ApiRequest';
 import { Config } from '@/Config';
 import { VeroLoader } from '@/Components';
+import { userAuth } from '../../../../Store/Actions';
+import { showSnackBar } from '../../../../Services/Helpers';
 
 const EditProfile = () => {
     const user = useSelector(state => state.user.user)
     const { t } = useTranslation()
     const [loading, setLoading] = useState(false)
     const { Layout } = useTheme()
+    const dispatch = useDispatch()
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [address, setAddress] = useState('')
@@ -39,12 +42,13 @@ const EditProfile = () => {
             .jsonParams(params)
             .response(response => {
               console.log("Response ", response),
-            //   dispatch(userAuth(response?.data?.data))
+              dispatch(userAuth(response?.data?.data))
+              showSnackBar(Config.SnackBarEnum.SUCCESS, "Profile updated successfully!")
               setLoading(false)
              })
             .error(error => {
               console.log('Showing error', error),
-            //   showSnackBar(Config.SnackBarEnum.ERROR, error?.meta?.message ?? "Something went wrong! we are fixing it.")
+              showSnackBar(Config.SnackBarEnum.ERROR, error?.meta?.message ?? "Something went wrong! we are fixing it.")
               setLoading(false)
             })
             .build()

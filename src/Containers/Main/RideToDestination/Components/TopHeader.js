@@ -5,9 +5,9 @@ import { useTheme } from '@/Hooks'
 import { goBack } from '../Navigators/utils'
 import { useTranslation } from 'react-i18next'
 import { VeroTextInput } from '@/Components';
-import { VeroButton } from '../../../../Components';
-import { WP } from '../../../../Theme/Responsive';
-import { Colors } from '../../../../Theme/Variables'
+import { VeroButton } from '@/Components';
+import { WP } from '@/Theme/Responsive';
+import { Colors } from '@/Theme/Variables'
 
 
 const TopHeader = (props) => {
@@ -19,9 +19,18 @@ const { Layout, Images, Colors, Gutters } = useTheme()
   return (
   <View style={styles.requestHeader}>
   {/* <View style={Gutters.largeTMargin}> */}
-  <VeroButton style={{width: WP('82'), marginBottom: WP('2')}} title="End Trip"
+  <View style={{flexDirection: 'row', justifyContent: 'space-evenly', marginBottom: WP('2')}}>
+  <VeroButton style={{width: WP('60')}} title="End Trip"
   onPress={props?.onPressEnd}
  />
+ <TouchableOpacity onPress={props?.onPressMessage} style={{marginTop: WP('5')}}>
+   <Icon name="chatbox-ellipses-sharp" size={30} color={"#000000"}/>
+   </TouchableOpacity>
+   <View style={styles.verticalDivider}></View>
+  <TouchableOpacity onPress={props?.onPressCall} style={{marginTop: WP('5')}}>
+  <Icon name="ios-call" size={28} color={"#000000"}/>
+  </TouchableOpacity>
+ </View>
   <Text style={styles.text}>{name}</Text>
   <View style={styles.divider}></View>
     <Text style={styles.dimedText}>Dropoff Address</Text>
@@ -71,6 +80,12 @@ const styles=StyleSheet.create({
               height: WP('75'),
               backgroundColor: Colors.white,
           },
+          verticalDivider: {
+            borderWidth: WP(0.1),
+            height: WP('10'),
+            borderColor: 'black',
+            marginTop: WP('3.5')
+          }
 })
 
 export default TopHeader;

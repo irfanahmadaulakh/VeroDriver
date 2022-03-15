@@ -253,8 +253,8 @@ const MapScreen = () => {
     
     <View style={[Layout.rowCenter, Layout.justifyContentBetween ]}>
     <GasStationButton onGassPress={()=>
-    // console.warn("No gas stations nearby")
-    navigate("ChatScreen")
+    console.warn("No gas stations nearby")
+    // navigate("ChatScreen")
     }/>
     <Earnings/>
     <Avatar onPressAvatar={()=> navigate("ProfileStack")}/>
