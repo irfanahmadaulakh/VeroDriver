@@ -1,30 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { Colors } from '@/Theme/Variables';
 import { WP } from '@/Theme/Responsive';
 import { useTheme } from '@/Hooks'
+import moment from 'moment'
 
 const DailyDetails = (props) => {
+  console.log("props in daily details", props);
+  const { totalStats } = props
   const { Layout } = useTheme()
+  const [date, setDate] = useState(new Date())
   return (
     <ScrollView>
       <View style={styles.container}>
-           <Text style={styles.textGrey}>01 Mar 22 at 10:47 am</Text>
-           <Text style={styles.textBold}>$<Text style={{color:'black', fontSize: WP('8')}}>153.75</Text></Text>
+           <Text style={styles.textGrey}>{moment(date)?.format('ddd, DD MMMM YYYY')}</Text>
+           <Text style={styles.textBold}>$<Text style={{color:'black', fontSize: WP('8')}}>{totalStats?.amount}</Text></Text>
            <View style={styles.divider}></View>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <View style={styles.boxContainer}>
-            <Text style={Layout.textNumbers}>15</Text>
+            <Text style={Layout.textNumbers}>{totalStats?.trips}</Text>
             <Text style={Layout.text}>Trips</Text>
         </View>
         <View style={Layout.dividerVertical}></View>
         <View style={styles.boxContainer}>
-        <Text style={Layout.textNumbers}>8:56</Text>
+        <Text style={Layout.textNumbers}>{totalStats?.time}</Text>
             <Text style={Layout.text}>Online Hours</Text>
         </View>
         <View style={Layout.dividerVertical}></View>
         <View style={styles.boxContainer}>
-        <Text style={Layout.textNumbers}>$22.3</Text>
+        <Text style={Layout.textNumbers}>${totalStats?.amount}</Text>
             <Text style={Layout.text}>Cash Trip</Text>
         </View>
         </View>

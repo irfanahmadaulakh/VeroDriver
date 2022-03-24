@@ -13,14 +13,14 @@ const Settings = (props) => {
   const { Layout } =useTheme()
   return (
   <View style={Layout.fill}>
-    <VeroHeader title={t("settings")}/>
+    <VeroHeader title={t("settings")}/>  
       <ScrollView>
       <View style={styles.settingsView}>
           <SettingsItems onPress={()=>navigate("Profile")} icon="person" text={t("myprofile")}/>
           <SettingsItems onPress={()=>navigate("MyVehicle")} icon="ios-car" text={t("myvehicle")}/>
           <SettingsItems icon="ios-document-text-sharp" text={t("personaldocument")}/>
-          <SettingsItems icon="bank-outline" text={t("bankdetails")}/>
-          <SettingsItems icon="ios-lock-closed" text={t("changepassword")}/>
+          <SettingsItems onPress={()=>navigate("BankDetails")} icon="bank-outline" text={t("bankdetails")}/>
+          <SettingsItems onPress={()=>navigate("ChangePassword")} icon="ios-lock-closed" text={t("changepassword")}/>
         </View>
         <Text style={Layout.helpText}>{t("help").toUpperCase()}</Text>
         <View style={styles.settingsView}>

@@ -13,6 +13,7 @@ import { APIRequest } from '@/Services/ApiRequest'
 import { Config } from '@/Config'
 import { goBack } from '@/Navigators/utils';
 import { VeroLoader } from '@/Components';
+import { showSnackBar } from '@/Services/Helpers';
 
 
 const ForgotPassword = (props) => {
@@ -34,6 +35,7 @@ const ForgotPassword = (props) => {
             .jsonParams(params)
             .response(response => {
               console.log("Response ", response);
+              showSnackBar(Config.SnackBarEnum.SUCCESS, "Please check your email for new password")
               setLoading(false)
               goBack()
             })

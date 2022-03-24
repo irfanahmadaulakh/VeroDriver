@@ -10,6 +10,9 @@ import RideDetails from './RideDetails'
 import EditProfile from './EditProfile'
 import Earnings from './Earnings'
 import Summary from './Summary'
+import BankDetails from './BankDetails'
+import EditBankDetails from './BankDetails/EditBankDetails'
+import ChangePassword from './ChangePassword'
 
 const Stack = createStackNavigator()
 
@@ -19,6 +22,8 @@ const ProfileStack = () => {
     <Stack.Navigator headerMode={'none'}>
       <Stack.Screen name="ProfileDetails" component={ProfileDetails} />
       <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="EditBankDetails" component={EditBankDetails} />
+      <Stack.Screen name="BankDetails" component={BankDetails} />
       <Stack.Screen name="Earnings" component={Earnings} />
       <Stack.Screen name="Summary" component={Summary} />
       <Stack.Screen name="Profile" component={Profile} />
@@ -26,6 +31,7 @@ const ProfileStack = () => {
       <Stack.Screen name="RideDetails" component={RideDetails} />
       <Stack.Screen name="MyVehicle" component={MyVehicle} />
       <Stack.Screen name="SwitchService" component={SwitchService} />
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
 
 

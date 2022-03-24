@@ -60,5 +60,12 @@ export default {
   rating: "Rating",
   cancellation: "Cancellation",
   otp: "OTP Verification",
-  otpSubTitle: "Enter the 4-digit code sent to you at"
+  otpSubTitle: "Enter the 4-digit code sent to you at",
+  bankName: 'Bank Name',
+  holderName: 'Account Holder Name',
+  accountNumber: 'Account Number',
+  swiftCode: 'Swift/FSC Code',
+  oldPass: "Enter old password",
+  newPass: "Enter new password",
+  confirmNewPass: "Confirm new password"
 }

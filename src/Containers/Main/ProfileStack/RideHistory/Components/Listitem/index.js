@@ -46,7 +46,8 @@ if (service_type == 'pick_up') {
   return (
    <TouchableOpacity style={styles.container} onPress={()=>props.onPressItem(props)}>
    {renderServiceName()}
-   <Text style={styles.text}>{`Time of Request: ${moment(created_at).format('MMMM Do YYYY')}`}</Text>
+   <Text style={styles.text}>{`Date of Request: ${moment(created_at).format('MMMM Do YYYY')}`}</Text>
+   <Text style={styles.text}>{`Time of Request: ${moment(created_at).format('h:mm:ss a')}`}</Text>
    <Text style={styles.text}>{`Status: ${getStatus()}`}</Text>
    </TouchableOpacity>
   )

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Alert } from 'react-native';
 import ProfileHeader from './Components/ProfileHeader'
 import { useTranslation } from 'react-i18next'
 import { useTheme } from '@/Hooks'
@@ -27,7 +27,20 @@ const ProfileDetails = (props) => {
     setRating(rating)
   },[])
 
-
+  const showAlert = ()=>{
+    Alert.alert(
+      "Warning",
+      "Are you sure want to Logout?",
+      [
+        {
+          text: "No",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Yes", onPress: () => logout() }
+      ]
+    );
+  }
   const logout = ()=>{
     console.log("Props", props);
     messaging().unsubscribeFromTopic('driver-new-purchase-'+user_id);    
@@ -58,7 +71,7 @@ const ProfileDetails = (props) => {
       <SettingsItems icon="star" text={t("subscription")}/>
       <SettingsItems icon="notifications-sharp" text={t("notification")}/>
       <SettingsItems onPress={pressSettings} icon="settings-sharp" text={t("settings")}/>
-      <SettingsItems onPress={logout} icon="power" text={t("logout")}/>
+      <SettingsItems onPress={showAlert} icon="power" text={t("logout")}/>
       </ScrollView>
     </View>
   );

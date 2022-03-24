@@ -13,22 +13,15 @@ import { VeroLoader } from '@/Components';
 import { userAuth } from '@/Store/Actions';
 import { showSnackBar } from '@/Services/Helpers';
 
-const EditProfile = () => {
+const ChangePassword = () => {
     const user = useSelector(state => state.user.user)
     const { t } = useTranslation()
     const [loading, setLoading] = useState(false)
     const { Layout } = useTheme()
     const dispatch = useDispatch()
-    const [email, setEmail] = useState('')
-    const [phone, setPhone] = useState('')
-    const [address, setAddress] = useState('')
-
-    useEffect(()=>{
-        const {mobile_number, email, street_address} = user
-        setPhone(mobile_number),
-        setEmail(email),
-        setAddress(street_address)
-      },[])
+    const [password, setPassword] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
 
     const submit = () =>{
         let params = {
@@ -57,34 +50,34 @@ const EditProfile = () => {
 
   return (
       <View style={Layout.fill}>
-        <VeroHeader title={t("editProfile")}/>
+        <VeroHeader title={t("changepassword")}/>
         <View style={{backgroundColor: Colors.white, marginTop: WP('1'), flex: 1}}>
         <VeroTextInput
-            placeholder={t('phone')}
-            value={phone}
-            keyboardType="numeric"
-            onChangeText={text => setPhone(text)}
+            placeholder={t('oldPass')}
+            value={password}
+            secureTextEntry
+            onChangeText={text => setPassword(text)}
         />
         <VeroTextInput
-            placeholder={t('email')}
-            value={email}
-            editable={false}
-            onChangeText={text => setEmail(text)}
+            placeholder={t('newPass')}
+            value={newPassword}
+            secureTextEntry
+            onChangeText={text => setNewPassword(text)}
         />
         <VeroTextInput
-            placeholder={t('address')}
-            value={address}
-            onChangeText={text => setAddress(text)}
+            placeholder={t('confirmNewPass')}
+            value={confirmPassword}
+            secureTextEntry
+            onChangeText={text => setConfirmPassword(text)}
         />
         <VeroButton
             title={t("save")}
-            onPress={submit}
+            // onPress={submit}
         />
-
         </View>
         {loading && <VeroLoader/>}
       </View>
   );
 }
 
-export default EditProfile;
+export default ChangePassword;

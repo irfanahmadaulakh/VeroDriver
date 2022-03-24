@@ -6,27 +6,29 @@ import { useTheme } from '@/Hooks'
 import { VeroBarChart } from '@/Components';
 
 const WeeklyDetails = (props) => {
+  console.log("props in weekly summary", props);
+  const { totalStats, weeklyStats } = props
   const { Layout } = useTheme()
   return (
     <ScrollView>
       <View style={styles.container}>
            <Text style={styles.textGrey}>01 Mar 22 at 10:47 am</Text>
-           <Text style={styles.textBold}>$<Text style={{color:'black', fontSize: WP('8')}}>153.75</Text></Text>
+           <Text style={styles.textBold}>$<Text style={{color:'black', fontSize: WP('8')}}>{totalStats?.trips}</Text></Text>
            {/* <VeroBarChart/> */}
            <View style={styles.divider}></View>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <View style={styles.boxContainer}>
-            <Text style={Layout.textNumbers}>15</Text>
+            <Text style={Layout.textNumbers}>{totalStats?.trips}</Text>
             <Text style={Layout.text}>Trips</Text>
         </View>
         <View style={Layout.dividerVertical}></View>
         <View style={styles.boxContainer}>
-        <Text style={Layout.textNumbers}>8:56</Text>
+        <Text style={Layout.textNumbers}>{totalStats?.time}</Text>
             <Text style={Layout.text}>Online Hours</Text>
         </View>
         <View style={Layout.dividerVertical}></View>
         <View style={styles.boxContainer}>
-        <Text style={Layout.textNumbers}>$22.3</Text>
+        <Text style={Layout.textNumbers}>${totalStats?.amount}</Text>
             <Text style={Layout.text}>Cash Trip</Text>
         </View>
         </View>
