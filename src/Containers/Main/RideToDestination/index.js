@@ -391,6 +391,29 @@ const RideToDestination = (props) => {
     .doRequest()
   }
 
+  const fareCalculation = () => {
+    let params={
+      is_estimated: false,
+      purchase_amount: 100,
+      miles: 25,
+      minutes: 40,
+      storeCost: 10
+    }
+    new APIRequest.Builder()
+    .post()
+    .reqURL(`${Config.END_POINTS.PURCHASE}/${purchase_id}/calculate-fare`)
+    .jsonParams(params)
+    .response(response => {
+      console.log("Response of fare calculation ", response),
+      endTrip()
+     })
+    .error(error => {
+      console.log('Showing error', error)
+    })
+    .build()
+    .doRequest()
+  }
+
   const arriveTrip = () => {
     let params = {
       purchase_id: purchase_id
@@ -446,7 +469,8 @@ const RideToDestination = (props) => {
       alert("Enter required information (Receipt Picture, Delivery Proof, Purchase Amount)")
     } else {
       console.log("In else");
-      endTrip()
+      fareCalculation()
+      // endTrip()
     }
   }
 
@@ -524,7 +548,7 @@ const RideToDestination = (props) => {
           deliveryImage={pickedImageDelivery}
           value={amount}
           onChangeText={text => setAmount(text)}
-          onPressEnd={endTrip}
+          onPressEnd={fareCalculation}
           serviceType={serviceType}
           pickupFrom={dropOff}
           status={statusIs}
@@ -546,7 +570,7 @@ const RideToDestination = (props) => {
       <TopHeader
         onPressMessage={()=>navigate("ChatScreen")}
         onPressCall={()=>console.warn("You can't make call")}
-        onPressEnd={endTrip}
+        onPressEnd={fareCalculation}
         name={passenger}
         serviceType={serviceType}
         pickupFrom={dropOff}

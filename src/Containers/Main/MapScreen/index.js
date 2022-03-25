@@ -16,13 +16,16 @@ import { Config } from '@/Config'
 import { showSnackBar } from '@/Services/Helpers/index'
 import { useDispatch, useSelector } from 'react-redux'
 import messaging from '@react-native-firebase/messaging';
-import { setPurchaseID } from '@/Store/Actions/user'
+import { setPurchaseID, setActiveStatus } from '@/Store/Actions/user'
 import axios from 'axios';
-import { WP } from '../../../Theme/Responsive';
+import { WP } from '@/Theme/Responsive';
 
 const MapScreen = () => {
 
   const user = useSelector(state => state.user.user)
+  const activeStatus = useSelector(state => state.user.activeStatus)
+  console.log("Active Status", activeStatus);
+  
   const user_id = useSelector(state => state.user.user_id)
   const { width, height } = Dimensions.get('screen');
   const [driverLocation, setDriverLocation] = useState();
@@ -58,6 +61,12 @@ const MapScreen = () => {
     console.log("user here is ", user);
     await getLocationAsync()
     console.log("useEffect called!");
+    if(activeStatus == true){
+      console.log("Active statusss in useeffedcttt",activeStatus , " and off is ", offline);
+      setOffline(true)
+    } else {
+      setOffline(false)
+    }
     
   }, []);
 
@@ -112,8 +121,11 @@ const MapScreen = () => {
         // console.log("Response ", response)
         if(response?.data?.data?.is_online == true){
           showSnackBar(Config.SnackBarEnum.SUCCESS, "You are Online!")
+          dispatch(setActiveStatus(true))
         } else if(response?.data?.data?.is_online == false){
           showSnackBar(Config.SnackBarEnum.ERROR, "You are Offline!")
+          dispatch(setActiveStatus(false))
+
         }
 
        })

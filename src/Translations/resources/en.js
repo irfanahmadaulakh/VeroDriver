@@ -67,5 +67,5 @@ export default {
   swiftCode: 'Swift/FSC Code',
   oldPass: "Enter old password",
   newPass: "Enter new password",
-  confirmNewPass: "Confirm new password"
+  confirmNewPass: "Confirm new password",
 }

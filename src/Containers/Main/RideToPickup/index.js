@@ -418,8 +418,31 @@ const RideToPickup = (props) => {
       alert("Enter required information (Digital Signature, Delivery Proof, Purchase Amount)")
     } else {
       console.log("In else");
-      endTrip()
+      fareCalculation()
     }
+  }
+
+  const fareCalculation = () => {
+    let params={
+      is_estimated: false,
+      purchase_amount: amount,
+      miles: 25,
+      minutes: 40,
+      storeCost: 0
+    }
+    new APIRequest.Builder()
+    .post()
+    .reqURL(`${Config.END_POINTS.PURCHASE}/${purchase_id}/calculate-fare`)
+    .jsonParams(params)
+    .response(response => {
+      console.log("Response of fare calculation ", response),
+      endTrip()
+     })
+    .error(error => {
+      console.log('Showing error', error)
+    })
+    .build()
+    .doRequest()
   }
 
   const uploadPicture = async ()=> {

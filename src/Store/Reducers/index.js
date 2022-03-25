@@ -1,5 +1,11 @@
 import * as Actions from '../Actions/ActionTypes'
-const User = (state = { user: null, token: null, user_id: null, purchase_id: null, rideDetails: null, itemDetails: null }, action) => {
+const User = (state = { user: null, 
+  token: null, 
+  user_id: null, 
+  purchase_id: null, 
+  rideDetails: null, 
+  itemDetails: null,
+  activeStatus: null }, action) => {
   console.log('showing values of actions here', action)
   switch (action.type) {
     case Actions.USER:
@@ -24,7 +30,13 @@ const User = (state = { user: null, token: null, user_id: null, purchase_id: nul
           ...state,
           itemDetails: action.itemDetails,
         }
-    default:
+        case Actions.ACTIVE_STATUS:
+        return {
+          ...state,
+          activeStatus: action.activeStatus,
+        }
+    default
+    :
       return state
   }
 }

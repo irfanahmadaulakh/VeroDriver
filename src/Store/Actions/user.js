@@ -22,5 +22,10 @@ export const setItemDetails = item => ({
   itemDetails: item,
 
 })
+export const setActiveStatus = item => ({
+  type: ActionTypes.ACTIVE_STATUS,
+  activeStatus: item,
+
+})
 
 

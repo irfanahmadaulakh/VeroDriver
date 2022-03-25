@@ -9,8 +9,10 @@ import { Config } from '@/Config';
 import { useSelector } from 'react-redux';
 
 let servicesArray = new Array()
-const SwitchService = (props) => {
+const SwitchService = (props) => {  
   const user = useSelector(state => state.user.user)
+  console.log("user details in switch service", user);
+  
   const { t } = useTranslation()
   const { Layout } =useTheme()
   const [loading, setLoading] = useState(false)

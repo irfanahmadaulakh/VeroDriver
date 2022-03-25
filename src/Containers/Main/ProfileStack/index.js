@@ -13,6 +13,7 @@ import Summary from './Summary'
 import BankDetails from './BankDetails'
 import EditBankDetails from './BankDetails/EditBankDetails'
 import ChangePassword from './ChangePassword'
+import TermsConditions from './TermsConditions'
 
 const Stack = createStackNavigator()
 
@@ -33,6 +34,8 @@ const ProfileStack = () => {
       <Stack.Screen name="SwitchService" component={SwitchService} />
       <Stack.Screen name="ChangePassword" component={ChangePassword} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
+      <Stack.Screen name="TermsConditions" component={TermsConditions} />
+
 
 
 
