@@ -66,6 +66,7 @@ export default {
   accountNumber: 'Account Number',
   swiftCode: 'Swift/FSC Code',
   oldPass: "Enter old password",
-  newPass: "Enter new password",
-  confirmNewPass: "Confirm new password",
+  newPass: "Re Type old password",
+  confirmNewPass: "Enter new password",
+  loremIpsum: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in malesuada elit. Proin blandit euismod nulla, a eleifend nisi suscipit nec. Curabitur tincidunt gravida nibh ac tincidunt. Phasellus ac eleifend nibh. Quisque a nisl eget ante semper iaculis eu pretium urna. Mauris ut nisi ultricies, faucibus arcu sed, fermentum sem. Aliquam efficitur nisi sed est lobortis, sit amet ultrices diam aliquet. Nam in nisi est. Vivamus velit mi, mollis at tincidunt tempor, ullamcorper ut dolor. Cras eleifend ac arcu vel lobortis. Curabitur lectus magna, sollicitudin a tristique non, mattis non dolor. Vivamus convallis semper commodo. Morbi ut leo eget arcu pulvinar hendrerit. Quisque ex purus, egestas ullamcorper enim dignissim, elementum tincidunt mauris. Etiam feugiat dapibus justo. Nullam sollicitudin velit odio, et hendrerit eros pellentesque nec. Pellentesque blandit elementum lorem eu finibus. Nam dapibus sodales justo ullamcorper porttitor. Pellentesque auctor metus feugiat enim gravida, nec congue felis sagittis. Suspendisse vestibulum bibendum est, vitae tincidunt enim sagittis in. Vestibulum vestibulum libero eu erat malesuada egestas. Suspendisse et pellentesque ex, non ultricies neque. Nam luctus vehicula nisi eget placerat. Cras in ante a nulla gravida feugiat. Maecenas lacinia urna vel urna sollicitudin venenatis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus sit amet consequat eros, vel condimentum turpis. Duis ac eros porta, accumsan lorem sit amet, congue lacus. Donec porta leo risus, a aliquet tortor tempor eu.'
 }

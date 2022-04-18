@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { WP } from '@/Theme/Responsive';
 
-const VeroText = (props) => {
+const VeroText = ({text}) => {
   return (
-    <View style={styles.container}>
-    <Text>
-  kdjflksjflksjdflksdjflkjdslkfjsklfjlskdjflksdfksjdfklsdfkljsdklfjsdkjfksdjfl
+    <ScrollView style={styles.container}>
+    <Text style={styles.text}>
+        {text}
       </Text>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -17,6 +17,11 @@ const styles = StyleSheet.create({
         flex: 1, 
         backgroundColor: 'white', 
         marginTop: WP('1')
+    },
+    text: {
+      fontSize: WP('5'),
+      margin: WP('5'),
+      textAlign: 'justify'
     }
 })
 

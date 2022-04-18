@@ -7,8 +7,8 @@ export const isNetworkConnected = () => {
 export const showSnackBar = (type, message) => {
   let Snackbar = SnackBarManager.getSnackBar()
   setTimeout(() => {
-    Snackbar.alertWithType(type, '', message, 1500)
-  }, 200)
+    Snackbar.alertWithType(type, '', message, 1000)
+  }, 100)
 }
 
 export const getCameraPicture = (success, reject) => {

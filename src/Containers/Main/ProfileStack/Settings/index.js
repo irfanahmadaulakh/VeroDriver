@@ -24,9 +24,9 @@ const Settings = (props) => {
         </View>
         <Text style={Layout.helpText}>{t("help").toUpperCase()}</Text>
         <View style={styles.settingsView}>
-        <SettingsItems onPress={()=>navigate("TermsConditions")} icon="ios-document-text-sharp" text={t("terms")}/>
-          <SettingsItems icon="shield-checkmark" text={t("privacy")}/>
-          <SettingsItems icon="person" text={t("about")}/>
+          <SettingsItems onPress={()=>navigate("TermsConditions")} icon="ios-document-text-sharp" text={t("terms")}/>
+          <SettingsItems onPress={()=>navigate("PrivacyPolicy")} icon="shield-checkmark" text={t("privacy")}/> 
+          <SettingsItems onPress={()=>navigate("About")} icon="person" text={t("about")}/>
           <SettingsItems icon="ios-mail-outline" text={t("contactUs")}/>
         </View>
       </ScrollView>

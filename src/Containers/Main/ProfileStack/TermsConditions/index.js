@@ -14,7 +14,7 @@ const TermsConditions = () => {
   return (
       <View style={Layout.fill}>
       <VeroHeader title={t("terms")}/>
-        <VeroText/>
+        <VeroText text={t('loremIpsum')}/>
       </View>
   );
 }

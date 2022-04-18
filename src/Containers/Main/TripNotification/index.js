@@ -41,6 +41,7 @@ const TripNotification = (props) => {
     const [packageDetails, setPackageDetails] = useState()
     const [foodItems, setFoodItems] = useState()
     const [distance, setDistance] = useState()
+    const [dropDistance, setDropDistance] = useState()
     const [pickupCoordinates, setPickupCoordinates] = useState([])
     const [dropCoordinates, setDropCoordinates] = useState([])
     const [currentLocation, setCurrentLocation] = useState({
@@ -167,6 +168,7 @@ const TripNotification = (props) => {
       })
         .then(function (response) {
           setDropOff(response?.data?.destination_addresses.toString()),
+          setDropDistance(response?.data?.rows[0]?.elements[0]?.distance?.value * 0.000621371192),
           dist = response?.data?.rows[0]?.elements[0]?.distance?.value * 0.000621371192;
           time = (response?.data?.rows[0]?.elements[0]?.duration?.value / 60)?.toFixed();
           place = response?.data?.destination_addresses;
@@ -187,6 +189,7 @@ const TripNotification = (props) => {
         service: serviceType, 
         dropOff: dropOff,
         status: "Pending",
+        finalDistance: dropDistance,
         pickupLocation: pickupCoordinates,
         dropLocation: dropCoordinates,
         restaurantDetails: restaurantDetails,

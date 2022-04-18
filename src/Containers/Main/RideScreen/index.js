@@ -95,12 +95,12 @@ const RideScreen = (props) => {
 
   useEffect(() => {
     console.log("1st useEffect called!");
-    setServiceType(service),
-    setPickupFrom(pickup),
-    setPassenger(name),
-    setStatusIs(status),
-    setpickupCoordinates(pickupLocation),
-    setDropCoordinates(dropLocation)
+    setServiceType(service && service),
+    setPickupFrom(pickup && pickup),
+    setPassenger(name && name),
+    setStatusIs(status && status),
+    setpickupCoordinates(pickupLocation && pickupLocation),
+    setDropCoordinates(dropLocation && dropLocation)
   }, [])
   useEffect(()=>{
     if(service){
@@ -372,6 +372,7 @@ const RideScreen = (props) => {
   };
 
   const startTrip = () => {
+    let startTime = new Date()
     let params = {
       purchase_id: purchase_id
     }
@@ -381,7 +382,7 @@ const RideScreen = (props) => {
     .jsonParams(params)
     .response(response => {
       console.log("Response ", response),
-      navigate("RideToDestination")
+      navigate("RideToDestination", startTime={startTime})
      })
     .error(error => {
       console.log('Showing error', error)
@@ -489,7 +490,6 @@ const RideScreen = (props) => {
                   key={`coordinate_${index}`}
                   onLoad={() => forceUpdate()}
                   coordinate={coordinates[0]}>
-                  {console.log("coordinates in 1st marker, ", coordinates[0])}
                     <Icon name="map-marker" size={30} color={Colors.black}  />
                 </MapView.Marker.Animated>
               ))}
@@ -500,7 +500,6 @@ const RideScreen = (props) => {
                 flat={true}
                 ref={markerRef}
                 >
-                {console.log("coordinates in 2nd marker, ", startCoordinate)}
                 <Icon name="location-arrow" size={30} color={Colors.orange}  />
               </MapView.Marker.Animated>
               }
@@ -508,7 +507,7 @@ const RideScreen = (props) => {
                 <MapViewDirections
                   origin={coordinates[1]}
                   waypoints={
-                    coordinates.length > 2
+                    coordinates?.length > 2
                       ? coordinates.slice(1, -1)
                       : []
                   }
@@ -520,7 +519,7 @@ const RideScreen = (props) => {
                   mode="DRIVING"
                   onStart={(params) => {
                     console.log(
-                      `Started routing between "${params.origin}" and "${params.destination}"`,
+                      `Started routing between "${params?.origin}" and "${params?.destination}"`,
                     );
                   }}
                   onError={(errorMessage) => {

@@ -14,6 +14,8 @@ import BankDetails from './BankDetails'
 import EditBankDetails from './BankDetails/EditBankDetails'
 import ChangePassword from './ChangePassword'
 import TermsConditions from './TermsConditions'
+import PrivacyPolicy from './PrivacyPolicy'
+import About from './About'
 
 const Stack = createStackNavigator()
 
@@ -35,6 +37,11 @@ const ProfileStack = () => {
       <Stack.Screen name="ChangePassword" component={ChangePassword} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="TermsConditions" component={TermsConditions} />
+      <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+      <Stack.Screen name="About" component={About} />
+
+
+      
 
 
 

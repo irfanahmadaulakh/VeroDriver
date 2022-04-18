@@ -425,7 +425,7 @@ const RideToPickup = (props) => {
   const fareCalculation = () => {
     let params={
       is_estimated: false,
-      purchase_amount: amount,
+      purchase_amount: amount ? amount : 0,
       miles: 25,
       minutes: 40,
       storeCost: 0

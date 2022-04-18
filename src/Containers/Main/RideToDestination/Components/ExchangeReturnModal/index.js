@@ -22,7 +22,7 @@ const ExchangeReturnModal = (props) => {
           <TouchableOpacity onPress={props.onPressCross} style={{position: 'absolute', top: WP('4'), right: WP('4')}}>
           <Icon name="circle-with-cross" size={30} color={"#000000"}/>
           </TouchableOpacity>
-            <Text style={styles.modalText}>{name}</Text>
+            {/* <Text style={styles.modalText}>{name}</Text> */}
             <Image style={styles.image} source={{ uri: reciept_image}}/>
             <Image style={styles.image} source={{ uri: item_image}}/>
 

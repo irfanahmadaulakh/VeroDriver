@@ -12,6 +12,7 @@ import { Config } from '@/Config';
 import { VeroLoader } from '@/Components';
 import { userAuth } from '@/Store/Actions';
 import { showSnackBar } from '@/Services/Helpers';
+import { goBack } from '../../../../Navigators/utils';
 
 const ChangePassword = () => {
     const user = useSelector(state => state.user.user)
@@ -20,23 +21,24 @@ const ChangePassword = () => {
     const { Layout } = useTheme()
     const dispatch = useDispatch()
     const [password, setPassword] = useState('')
+    const [confirmOldPassword, setConfirmOldPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
 
     const submit = () =>{
         let params = {
-            mobile_number: phone,
-            street_address: address
+          currentPassword: password,
+          reTypePassword: confirmOldPassword,
+          newPassword: newPassword,
           }
           setLoading(true)
           new APIRequest.Builder()
-            .put()
-            .reqURL(Config.END_POINTS.USERS)
+            .post()
+            .reqURL(Config.END_POINTS.CHANGE_PASSWORD)
             .jsonParams(params)
             .response(response => {
               console.log("Response ", response),
-              dispatch(userAuth(response?.data?.data))
-              showSnackBar(Config.SnackBarEnum.SUCCESS, "Profile updated successfully!")
+              showSnackBar(Config.SnackBarEnum.SUCCESS, "Password changed successfully!"),
+              goBack()
               setLoading(false)
              })
             .error(error => {
@@ -60,19 +62,19 @@ const ChangePassword = () => {
         />
         <VeroTextInput
             placeholder={t('newPass')}
+            value={confirmOldPassword}
+            secureTextEntry
+            onChangeText={text => setConfirmOldPassword(text)}
+        />
+        <VeroTextInput
+            placeholder={t('confirmNewPass')}
             value={newPassword}
             secureTextEntry
             onChangeText={text => setNewPassword(text)}
         />
-        <VeroTextInput
-            placeholder={t('confirmNewPass')}
-            value={confirmPassword}
-            secureTextEntry
-            onChangeText={text => setConfirmPassword(text)}
-        />
         <VeroButton
             title={t("save")}
-            // onPress={submit}
+            onPress={submit}
         />
         </View>
         {loading && <VeroLoader/>}

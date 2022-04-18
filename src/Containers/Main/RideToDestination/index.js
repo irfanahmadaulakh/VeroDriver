@@ -32,6 +32,9 @@ const db = firebase.database()
 let imageUpload;
 
 const RideToDestination = (props) => {
+  
+  const { startTime } = props?.route?.params
+  console.log(" propss in ride destination", startTime);
 
   const mapRef = useRef(null);
   const markerRef = useRef(null);
@@ -42,7 +45,7 @@ const RideToDestination = (props) => {
   const ItemDetails = useSelector(state => state.user.itemDetails)
 
 
-  const { name, pickup, service, status, pickupLocation, dropLocation, dropOff} = ride
+  const { name, pickup, service, status, pickupLocation, dropLocation, dropOff, finalDistance} = ride
   console.log("Ride detail here are", ride);
   const { Layout, Images } = useTheme()
   const GOOGLE_MAPS_APIKEY = 'AIzaSyC6Vo_6ohnkLyGIw2IPmZka0TarRaeWJ2g';
@@ -392,11 +395,13 @@ const RideToDestination = (props) => {
   }
 
   const fareCalculation = () => {
+    let elapseTime = new Date() - startTime;
+    console.log(" params", startTime, " new date is ", new Date(), "elapse", );
     let params={
       is_estimated: false,
-      purchase_amount: 100,
-      miles: 25,
-      minutes: 40,
+      purchase_amount: amount ? amount: 0,
+      miles: finalDistance,
+      minutes: elapseTime / 1000 / 60,
       storeCost: 10
     }
     new APIRequest.Builder()
@@ -424,7 +429,7 @@ const RideToDestination = (props) => {
     .jsonParams(params)
     .response(response => {
       console.log("Response ", response)
-      navigate("RideToPickup")
+      navigate("RideToPickup" )
      })
     .error(error => {
       console.log('Showing error', error)

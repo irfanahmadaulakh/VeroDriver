@@ -398,7 +398,7 @@ textNumbers: {
     ...StyleSheet.absoluteFillObject,
     height: '100%',
     width: '100%',
-    // justifyContent: 'center',
+    // justifyContent: 'flex-end',
     // alignItems: 'center',
   },
   map: {

@@ -19,7 +19,8 @@ export const Config = {
     IMAGE: 'image',
     RIDES: 'driver/rides',
     UPLOAD_FILES: 'files/temp-files',
-    SERVICE_TYPE: 'users/service-type'
+    SERVICE_TYPE: 'users/service-type',
+    CHANGE_PASSWORD: 'users/change-password'
   },
   SnackBarEnum: {
     INFO: 'info',

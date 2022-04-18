@@ -239,6 +239,12 @@ const MapScreen = () => {
       zoomEnabled={true}
       zoomTapEnabled={true}
       style={Layout.map}
+    //   region={{
+    //   latitude: 37.78825,
+    //   longitude: -122.4324,
+    //   latitudeDelta: 0.0922,
+    //   longitudeDelta: 0.0421,
+    // }}
       region={{
         latitude: driverLocation?.latitude,
         longitude: driverLocation?.longitude,
@@ -261,7 +267,8 @@ const MapScreen = () => {
           </Marker>
       ))
       }
-    </MapView>}
+    </MapView>
+    }
     
     <View style={[Layout.rowCenter, Layout.justifyContentBetween ]}>
     <GasStationButton onGassPress={()=>
