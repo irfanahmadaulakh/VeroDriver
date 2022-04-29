@@ -36,7 +36,7 @@ const Profile = () => {
   const uploadSelfie = () => {
     getCameraPicture(
       image => {
-        image.map(pickedImage => {
+        image?.map(pickedImage => {
           setPickedImage(pickedImage),
           imageUpload=pickedImage
         })
@@ -93,7 +93,7 @@ const Profile = () => {
         <Text style={Layout.helpText2}>{t("info").toUpperCase()}</Text>
         <ProfileLineItem icon="phone-portrait-outline" text={mobileNumber}/>
         <ProfileLineItem icon="ios-mail-sharp" text={email}/>
-        <ProfileLineItem icon="language-outline" text={'English & Spanish'}/>
+        {/* <ProfileLineItem icon="language-outline" text={'English & Spanish'}/> */}
         <ProfileLineItem icon="home-sharp" text={address}/>
       </View>
   );

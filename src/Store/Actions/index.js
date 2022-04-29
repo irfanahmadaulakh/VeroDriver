@@ -1,1 +1,1 @@
-export { userAuth, setRideDetails, setItemDetails, userLogout } from './user'
+export { userAuth, setRideDetails, setItemDetails, userLogout, setUserServiceType } from './user'

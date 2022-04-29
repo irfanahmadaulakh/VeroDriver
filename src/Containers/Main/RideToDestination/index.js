@@ -441,7 +441,7 @@ const RideToDestination = (props) => {
   const receiptPicture = () => {
     getCameraPicture(
       image => {
-        image.map(pickedImage => {
+        image?.map(pickedImage => {
           setPickedImage(pickedImage),
           imageUpload=pickedImage
         })
@@ -455,7 +455,7 @@ const RideToDestination = (props) => {
   const deliveryPicture = () => {
     getCameraPicture(
       image => {
-        image.map(pickedImage => {
+        image?.map(pickedImage => {
           setPickedImageDelivery(pickedImage),
           imageUpload=pickedImage
         })

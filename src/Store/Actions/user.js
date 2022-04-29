@@ -27,5 +27,9 @@ export const setActiveStatus = item => ({
   activeStatus: item,
 
 })
+export const setUserServiceType = type => ({
+  type: ActionTypes.USER_SERVICE_TYPES,
+  userServiceTypes: type,
+})
 
 

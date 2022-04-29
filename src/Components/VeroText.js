@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
         marginTop: WP('1')
     },
     text: {
-      fontSize: WP('5'),
-      margin: WP('5'),
+      fontSize: WP('3.5'),
+      margin: WP('3'),
       textAlign: 'justify'
     }
 })

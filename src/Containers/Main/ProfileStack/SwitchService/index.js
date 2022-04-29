@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useTheme } from '@/Hooks'
 import { useTranslation } from 'react-i18next'
 import { VeroHeader, VeroLoader } from '@/Components';
 import Services from './Components/Services'
 import { APIRequest } from '@/Services/ApiRequest';
 import { Config } from '@/Config';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native'
+import { userAuth } from '@/Store/Actions';
+
 
 let servicesArray = new Array()
+let get_value_pick_up;
+let get_value_item_purchase;
+let get_value_food_delivery;
+let get_value_item_return;
+let get_value_item_exchange;
+let get_value_ride_share;
+let get_value_ride_single;
 const SwitchService = (props) => {  
   const user = useSelector(state => state.user.user)
+  const services_types = useSelector(state => state?.user?.userServiceTypes)
   console.log("user details in switch service", user);
-  
+  console.log("user switch service", services_types);
+  const nav = useNavigation()
   const { t } = useTranslation()
   const { Layout } =useTheme()
   const [loading, setLoading] = useState(false)
@@ -23,6 +35,38 @@ const SwitchService = (props) => {
   const [itemExchange, setItemExchange] = useState(false);
   const [rideShare, setRideShare] = useState(false); 
   const [rideSingle, setRideSingle] = useState(false);
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    const { service_types } = user
+      servicesArray = service_types?.split(",")
+    if(servicesArray){
+      get_value_pick_up = servicesArray.find(item => item == "pick_up")
+      get_value_item_purchase = servicesArray.find(item => item == "item_purchase")
+      get_value_food_delivery = servicesArray.find(item => item == "food_delivery")
+      get_value_item_return = servicesArray.find(item => item == "item_return")
+      get_value_item_exchange = servicesArray.find(item => item == "item_exchange")
+      get_value_ride_share = servicesArray.find(item => item == "ride_share")
+      get_value_ride_single = servicesArray.find(item => item == "ride_single")
+      if(get_value_pick_up){
+        setPickup(true)
+      } else if(get_value_item_purchase){
+        setPurchase(true)
+      } else if(get_value_food_delivery){
+        setDelivery(true)
+      } else if(get_value_item_return){
+        setItemReturn(true)
+      } else if(get_value_item_exchange){
+        setItemExchange(true)
+      } else if(get_value_ride_share){
+        setRideShare(true)
+      } else if(get_value_ride_single){
+        setRideSingle(true)
+      } else {
+      }
+    } 
+   
+  },[])
 
   const toggleSwitch1 = () => {
     setPickup(previousState => !previousState)
@@ -167,6 +211,7 @@ const SwitchService = (props) => {
       .jsonParams(params)
       .response(response => {
         console.log("Response ", response)
+        dispatch(userAuth(response?.data?.data))
         setLoading(false)
        })
       .error(error => {
