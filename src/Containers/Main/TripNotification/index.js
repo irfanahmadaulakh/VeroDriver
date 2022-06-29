@@ -39,6 +39,7 @@ const TripNotification = (props) => {
     const [itemExchangeDetails, setItemExchangeDetails] = useState()
     const [itemReturnDetails, setItemReturnDetails] = useState() 
     const [packageDetails, setPackageDetails] = useState()
+    const [services_type, setServices_Type] = useState()
     const [foodItems, setFoodItems] = useState()
     const [distance, setDistance] = useState()
     const [dropDistance, setDropDistance] = useState()
@@ -91,6 +92,7 @@ const TripNotification = (props) => {
           setItemReturnDetails(response?.data?.data?.data?.item_return)
           setPackageDetails(response?.data?.data?.data?.drop_of_packages?.items)
           assignValues(response?.data?.data?.data?.service_type),
+          setServices_Type(response?.data?.data?.data?.service_type)
           calculateDistanceTime(
             response?.data?.data?.data?.pick_up_location?.coordinates[0],
             response?.data?.data?.data?.pick_up_location?.coordinates[1],
@@ -187,6 +189,7 @@ const TripNotification = (props) => {
         name: "Passenger", 
         pickup: serviceType == "Food Delivery" ? restaurantDetails?.display_name : serviceType == "Item Purchase" ? puchasesDetails?.store : pickupFrom, 
         service: serviceType, 
+        service_type: services_type,
         dropOff: dropOff,
         status: "Pending",
         finalDistance: dropDistance,

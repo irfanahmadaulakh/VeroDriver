@@ -52,7 +52,7 @@ const Profile = () => {
   var photo = {
     name: imageUpload.name,
     type: imageUpload.type,
-    uri: imageUpload.uri.replace('file://', ''),
+    avatar: imageUpload.uri.replace('file://', ''),
     };
     //use formdata
     var formData = new FormData(); 
@@ -63,14 +63,14 @@ const Profile = () => {
     //use axios to POST
     await axios({
         method: 'POST',
-        url: Config.API_URL + Config.END_POINTS.UPLOAD_FILES,
+        url: Config.API_URL + 'files/'+ user._id +'/temp-files',
         data: formData,
-        config: {
-          headers: {
-            Authorization: token,
-            'Content-Type': 'multipart/form-data',
-          },
-        },
+        // config: {
+        //   headers: {
+        //     Authorization: token,
+        //     'Content-Type': 'multipart/form-data',
+        //   },
+        // },
         headers: {
             'Authorization': token,
             // 'Accept': 'application/json',

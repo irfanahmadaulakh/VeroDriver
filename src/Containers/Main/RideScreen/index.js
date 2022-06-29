@@ -224,18 +224,17 @@ const RideScreen = (props) => {
 
     
   // useEffect(()=> {
-  //   setInterval(()=> {
   //     updateMap()
-  //   }, 7000)
-  // })
+  // }, [7000])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log('Logs every minute');
+      updateMap()
+    }, 7000);
+    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+  })
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     updateMap()
-  // }, 7000);
-  //   return () => clearInterval(interval);
-  // }, [])
 
 
   const updateMap = async () => {

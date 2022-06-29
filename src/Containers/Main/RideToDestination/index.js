@@ -45,7 +45,7 @@ const RideToDestination = (props) => {
   const ItemDetails = useSelector(state => state.user.itemDetails)
 
 
-  const { name, pickup, service, status, pickupLocation, dropLocation, dropOff, finalDistance} = ride
+  const { name, pickup, service, service_type,  status, pickupLocation, dropLocation, dropOff, finalDistance} = ride
   console.log("Ride detail here are", ride);
   const { Layout, Images } = useTheme()
   const GOOGLE_MAPS_APIKEY = 'AIzaSyC6Vo_6ohnkLyGIw2IPmZka0TarRaeWJ2g';
@@ -235,12 +235,12 @@ const RideToDestination = (props) => {
 
   //===>> It works here..
   
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     updateMap()
-  // }, 7000);
-  //   return () => clearInterval(interval);
-  // }, [])
+  useEffect(() => {
+    const interval = setInterval(() => {
+      updateMap()
+  }, 7000);
+    return () => clearInterval(interval);
+  })
 
   const updateMap = async () => {
     console.log('control in update map');
@@ -398,15 +398,16 @@ const RideToDestination = (props) => {
     let elapseTime = new Date() - startTime;
     console.log(" params", startTime, " new date is ", new Date(), "elapse", );
     let params={
-      is_estimated: false,
+      is_estimated: true,
       purchase_amount: amount ? amount: 0,
       miles: finalDistance,
       minutes: elapseTime / 1000 / 60,
-      storeCost: 10
+      storeCost: 0,
+      service_type: service_type
     }
     new APIRequest.Builder()
     .post()
-    .reqURL(`${Config.END_POINTS.PURCHASE}/${purchase_id}/calculate-fare`)
+    .reqURL(`${Config.END_POINTS.PURCHASE}/calculate-fare`)
     .jsonParams(params)
     .response(response => {
       console.log("Response of fare calculation ", response),
