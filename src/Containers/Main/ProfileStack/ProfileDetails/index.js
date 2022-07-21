@@ -8,7 +8,7 @@ import SettingsItems from './Components/SettingsItems';
 import SwitchService from './Components/SwitchService';
 import { useDispatch, useSelector } from 'react-redux'
 import messaging from '@react-native-firebase/messaging';
-import { navigate } from '@/Navigators/utils';
+import { navigate, goBack } from '@/Navigators/utils';
 
 const ProfileDetails = (props) => {
   const user_id = useSelector(state => state.user.user_id)
@@ -54,6 +54,8 @@ const ProfileDetails = (props) => {
   const pressRideHistory = ()=> navigate('RideHistory')
   const pressSwitchService = ()=> navigate('SwitchService')
   const pressSummary = ()=> navigate("Summary")
+  const pressHome = ()=> goBack()
+
   return (
     <View style={Layout.fill}>
       <ProfileHeader
@@ -65,7 +67,7 @@ const ProfileDetails = (props) => {
       />
       <SwitchService onPress={pressSwitchService}/>
       <ScrollView>
-      <SettingsItems icon="home-sharp" text={t("home")}/>
+      <SettingsItems onPress={pressHome} icon="home-sharp" text={t("home")}/>
       <SettingsItems onPress={pressRideHistory} icon="md-car-outline" text={t("rideHistory")}/>
       <SettingsItems onPress={pressSummary} icon="ios-document-text-outline" text={t("summary")}/>
       <SettingsItems icon="star" text={t("subscription")}/>

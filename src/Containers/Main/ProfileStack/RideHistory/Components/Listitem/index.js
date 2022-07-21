@@ -19,6 +19,8 @@ if (service_type == 'pick_up') {
   return <Text style={styles.text}>A new Ride Pool request</Text>;
 } else if (service_type == 'food_delivery') {
   return <Text style={styles.text}>A new Food Delivery request</Text>;
+} else if (service_type == 'ride_single') {
+  return <Text style={styles.text}>A new Ride Single request</Text>;
 } else if (service_type == 'item_exchange') {
   return <Text style={styles.text}>A new Item Exchange request</Text>;
 } else {

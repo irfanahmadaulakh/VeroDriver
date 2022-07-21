@@ -52,30 +52,32 @@ const Profile = () => {
   var photo = {
     name: imageUpload.name,
     type: imageUpload.type,
-    avatar: imageUpload.uri.replace('file://', ''),
+    uri: imageUpload.uri.replace('file://', ''),
     };
     //use formdata
     var formData = new FormData(); 
     //append created photo{} to formdata
-    formData.append('image_type', 'purchase');
-    formData.append('api_key', token);
-    formData.append('image', photo);
+    formData.append('key', photo);
+    formData.append('license', photo);
+    formData.append('avatar', photo);
     //use axios to POST
     await axios({
         method: 'POST',
         url: Config.API_URL + 'files/'+ user._id +'/temp-files',
         data: formData,
-        // config: {
-        //   headers: {
-        //     Authorization: token,
-        //     'Content-Type': 'multipart/form-data',
-        //   },
-        // },
-        headers: {
-            'Authorization': token,
-            // 'Accept': 'application/json',
-            'Content-Type': 'multipart/form-data;'    
-        }}) .then(function (response) { console.log("Image axios Reponse",response)})
+        config: {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+        // headers: {
+        //     'Authorization': token,
+        //     // 'Accept': 'application/json',
+        //     'Content-Type': 'multipart/form-data;'    
+        // }
+      }) 
+        .then(function (response) { console.log("Image axios Reponse",response)})
         .catch(function (error) { console.log("Image axios Error",error.response)
     });
   }
