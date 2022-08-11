@@ -80,7 +80,7 @@ const RideToDestination = (props) => {
   const [customerDropLocation, setCustomerDropLocation] = useState()
   const [pickedImage, setPickedImage] = useState()
   const [pickedImageDelivery, setPickedImageDelivery] = useState()
-  const [startCoordinate, setStartCoordinates] = useState([])
+  const [startCoordinate, setStartCoordinates] = useState()
   const [amount, setAmount] = useState()
   const [modalVisible, setModalVisible] = useState(false)
   const [itemsData, setItemsData] = useState([])
@@ -117,29 +117,29 @@ const RideToDestination = (props) => {
           setCoordinates([
             {
               latitude: dropLocation[0]?.latitude,
-              longitude: dropLocation[0]?.longitude,
+              longitude: dropLocation[0]?.longitude
             },
             {
               latitude: position?.coords?.latitude,
-              longitude: position?.coords?.longitude,
-            },
+              longitude: position?.coords?.longitude
+            }
           ]),
-          setDegreeString(position?.coords?.heading),
+          setDegreeString(position?.coords?.heading)
           setRegion({
               latitude: position?.coords?.latitude,
               longitude: position?.coords?.longitude,
               latitudeDelta: LATITUDE_DELTA,
-              longitudeDelta: LONGITUDE_DELTA,
-            }),
+              longitudeDelta: LONGITUDE_DELTA
+            })
             setStartCoordinates({
               latitude: position?.coords?.latitude,
-              longitude: position?.coords?.longitude,
-            }),
+              longitude: position?.coords?.longitude
+            })
             console.log("useEffect called! in mid")
         },
         (error) => {
           // See error code charts below.
-          console.log(error?.code, error?.message);
+          console.log(error?.code, error?.message)
           alert("Location Not found!")
         },
         {enableHighAccuracy: true, timeout: 4500, interval: 800},

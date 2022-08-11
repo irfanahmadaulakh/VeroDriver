@@ -38,7 +38,6 @@ const RideScreen = (props) => {
   const markerRef = useRef(null);
   const ride = useSelector(state => state.user.rideDetails)
   const ItemDetails = useSelector(state => state.user.itemDetails)
-  console.log(" Seledtor foor",ItemDetails );
   const purchase_id = useSelector(state => state.user.purchase_id)
   const { name, pickup, service, status, pickupLocation, dropLocation} = ride
   console.log("Ride detail here are", ride);
@@ -78,7 +77,7 @@ const RideScreen = (props) => {
   const [packageModalVisible, setPackageModalVisible] = useState(false);
   const [itemsData, setItemsData] = useState([])
   const [exchangeModalVisible, setExchangeModalVisible] = useState(false);
-  const [startCoordinate, setStartCoordinates] = useState([])
+  const [startCoordinate, setStartCoordinates] = useState()
 
   const { width, height } = Dimensions.get('screen');
 
@@ -94,7 +93,6 @@ const RideScreen = (props) => {
   const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
   useEffect(() => {
-    console.log("1st useEffect called!");
     setServiceType(service && service),
     setPickupFrom(pickup && pickup),
     setPassenger(name && name),
@@ -104,36 +102,34 @@ const RideScreen = (props) => {
   }, [])
   useEffect(()=>{
     if(service){
-      console.log("2nd useEffect called!");
       Geolocation.getCurrentPosition(
         (position) => {
           // console.log('position watching in Ride Screen', pickupLocation[0].latitude)
           setCoordinates([
             {
               latitude: pickupLocation[0]?.latitude,
-              longitude: pickupLocation[0]?.longitude,
+              longitude: pickupLocation[0]?.longitude
             },
             {
               latitude: position?.coords?.latitude,
-              longitude: position?.coords?.longitude,
-            },
-          ]),
-          setDegreeString(position?.coords?.heading),
+              longitude: position?.coords?.longitude
+            }
+          ])
+          setDegreeString(position?.coords?.heading)
           setRegion({
               latitude: position?.coords?.latitude,
               longitude: position?.coords?.longitude,
               latitudeDelta: LATITUDE_DELTA,
-              longitudeDelta: LONGITUDE_DELTA,
-            }),
+              longitudeDelta: LONGITUDE_DELTA
+            })
             setStartCoordinates({
               latitude: position?.coords?.latitude,
-              longitude: position?.coords?.longitude,
-            }),
-            console.log("useEffect called! in mid")
+              longitude: position?.coords?.longitude
+            })
         },
         (error) => {
           // See error code charts below.
-          console.log(error?.code, error?.message);
+          console.log(error?.code, error?.message)
           alert("Location Not found!")
         },
         {enableHighAccuracy: true, timeout: 4500, interval: 800},
@@ -451,9 +447,8 @@ const RideScreen = (props) => {
         data={ItemDetails}
         onPressStart={startTrip}
         onPressItem={(item)=> {
-          setItemsData(item),
-          console.log("Item is",item)
-          setExchangeModalVisible(true)
+          setItemsData(item)
+            setExchangeModalVisible(true)
           }}
         serviceType={serviceType}
         pickupFrom={pickupFrom}
@@ -473,7 +468,6 @@ const RideScreen = (props) => {
       }
         <View style={Layout.fill}>
         {region && 
-        console.log("Data for testing ", itemsData),
           <MapView
               provider={PROVIDER_GOOGLE}
               initialRegion={region}
@@ -488,6 +482,7 @@ const RideScreen = (props) => {
               ref={mapRef}
               onPanDrag={dragMap}
               >
+              {console.log("Coordinates", coordinates[0])}
               {coordinates && coordinates.map((coordinate, index) => (
                 <MapView.Marker.Animated
                   key={`coordinate_${index}`}
@@ -496,6 +491,7 @@ const RideScreen = (props) => {
                     <Icon name="map-marker" size={30} color={Colors.black}  />
                 </MapView.Marker.Animated>
               ))}
+              {console.log("start Coordinates", startCoordinate)}
               {startCoordinate &&
                 <MapView.Marker.Animated
                coordinate={startCoordinate}

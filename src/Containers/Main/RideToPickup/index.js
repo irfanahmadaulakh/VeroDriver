@@ -71,7 +71,7 @@ const RideToPickup = (props) => {
   const [customerDropLocation, setCustomerDropLocation] = useState()
   const [pickedImage, setPickedImage] = useState()
   const [pickedImageDelivery, setPickedImageDelivery] = useState()
-  const [startCoordinate, setStartCoordinates] = useState([])
+  const [startCoordinate, setStartCoordinates] = useState()
   const [amount, setAmount] = useState()
   const [modalVisible, setModalVisible] = useState(false)
   const { width, height } = Dimensions.get('screen');

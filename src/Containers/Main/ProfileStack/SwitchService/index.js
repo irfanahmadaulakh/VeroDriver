@@ -226,7 +226,7 @@ const SwitchService = (props) => {
   return (
   <View style={Layout.fill}>
     <VeroHeader title={t("switchService")}/>
-    <View style={Layout.switchServiceContainer}>
+    <ScrollView style={Layout.switchServiceContainer}>
     <Services 
       text={'Package Pickup'}
       value={pickup}
@@ -262,7 +262,7 @@ const SwitchService = (props) => {
       value={rideSingle}
       onValueChange={toggleSwitch7}
     />
-    </View>
+    </ScrollView>
     {loading && <VeroLoader/>}
   </View>
      
