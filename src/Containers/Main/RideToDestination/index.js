@@ -202,28 +202,32 @@ const RideToDestination = (props) => {
     console.log('purchasesChildKey: ', purchasesChildKey);
     console.log('locationChildKey: ', locationChildKey);
 
-    if (purchasesChildKey == locationChildKey) {
-      await db
-        .ref()
-        .child('purchases_location')
-        .child(locationChildKey)
-        .once('value', (snapshot) => {
-          snapshot.forEach((childSnapshot) => {
-            // const childKey = childSnapshot.key;
-            // console.log('locationsubChildKey: ', childSnapshot.key);
-            if (childSnapshot.key) {
-              //   const childVal = childSnapshot.val();
-              //   console.log('location sub Child Key inside if: ', childVal);
-              locationSubChildKey = childSnapshot.key;
-            }
-          });
-        });
-      console.log('locationSubChildKey: ', locationSubChildKey);
-        setPurchasesChildKey(purchasesChildKey)
-        setLocationChildKey(locationChildKey)
-        setLocationSubChildKey(locationSubChildKey)
-        setCustomerDropLocation(customerDropLocation)
-      }
+    // if (purchasesChildKey == locationChildKey) {
+    //   await db
+    //     .ref()
+    //     .child('purchases_location')
+    //     .child(locationChildKey)
+    //     .once('value', (snapshot) => {
+    //       snapshot.forEach((childSnapshot) => {
+    //         // const childKey = childSnapshot.key;
+    //         // console.log('locationsubChildKey: ', childSnapshot.key);
+    //         if (childSnapshot.key) {
+    //           //   const childVal = childSnapshot.val();
+    //           //   console.log('location sub Child Key inside if: ', childVal);
+    //           locationSubChildKey = childSnapshot.key;
+    //         }
+    //       });
+    //     });
+    //   console.log('locationSubChildKey: ', locationSubChildKey);
+    //     // setPurchasesChildKey(purchasesChildKey)
+    //     // setLocationChildKey(locationChildKey)
+    //     // setLocationSubChildKey(locationSubChildKey)
+    //     // setCustomerDropLocation(customerDropLocation)
+    //   }
+      setPurchasesChildKey(purchasesChildKey)
+      setLocationChildKey(locationChildKey)
+      // setLocationSubChildKey(locationSubChildKey)
+      setCustomerDropLocation(customerDropLocation)
 
   }
   
@@ -249,7 +253,7 @@ const RideToDestination = (props) => {
     DeviceEventEmitter.addListener('headingUpdated', (data) => {
       checkAngle = data;
     });
-    if (!locationSubChildKey) {
+    if (!locationChildKey) {
       await databaseConnect()
     }
     Geolocation.getCurrentPosition(
@@ -318,15 +322,15 @@ const RideToDestination = (props) => {
   }
 
   const calculateDistanceTime = (latitude, longitude) => {
-    if (locationSubChildKey) {
+    if (locationChildKey) {
       // if(this.state.customerDropLocation.name)
       console.log('LAT LONG IN calculate,', latitude, longitude, "pickup's", dropLocation[0]?.latitude, dropLocation[0]?.longitude );
       
       const driverCoordsRefs = db
         .ref()
         .child('purchases_location')
-        .child(locationChildKey)
-        .child(locationSubChildKey);
+        .child(locationChildKey);
+        // .child(locationSubChildKey);
       const newDriverCoordsRef = driverCoordsRefs.push();
       newDriverCoordsRef.set({
         lat: latitude && latitude,

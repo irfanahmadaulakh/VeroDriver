@@ -61,34 +61,36 @@ const ChatScreen = props => {
     console.log('purchasesChildKey: ', purchasesChildKey);
     console.log('locationChildKey: ', locationChildKey);
 
-    if (purchasesChildKey == locationChildKey) {
-      await database()
-        .ref()
-        .child('purchases_location')
-        .child(locationChildKey)
-        .once('value', (snapshot) => {
-          snapshot.forEach((childSnapshot) => {
-            if (childSnapshot.key) {
-              locationSubChildKey = childSnapshot.key;
-            }
-          });
-        });
-      console.log('locationSubChildKey: ', locationSubChildKey);
-        setPurchasesChildKey(purchasesChildKey)
-        setLocationChildKey(locationChildKey)
-        setLocationSubChildKey(locationSubChildKey)
-      }
+    // if (purchasesChildKey == locationChildKey) {
+    //   await database()
+    //     .ref()
+    //     .child('purchases_location')
+    //     .child(locationChildKey)
+    //     .once('value', (snapshot) => {
+    //       snapshot.forEach((childSnapshot) => {
+    //         if (childSnapshot.key) {
+    //           locationSubChildKey = childSnapshot.key;
+    //         }
+    //       });
+    //     });
+    //   console.log('locationSubChildKey: ', locationSubChildKey);
+    //     setPurchasesChildKey(purchasesChildKey)
+    //     setLocationChildKey(locationChildKey)
+    //     setLocationSubChildKey(locationSubChildKey)
+    //   }
+      setPurchasesChildKey(purchasesChildKey)
+      setLocationChildKey(locationChildKey)
   }
 
 
     const onSend = async (message)=>{
       await databaseConnect()
-      if (locationSubChildKey) {
+      if (locationChildKey) {
             database()
             .ref()
             .child('purchases_location')
             .child(locationChildKey)
-            .child(locationSubChildKey)
+            // .child(locationSubChildKey)
             .push({
               is_chat: true,
               message: message[0].text,

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, Dimensions, PermissionsAndroid, Platform, Image
 } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'; 
-import { VeroGoButton } from '@/Components';
+import { VeroGoButton, VeroBottomSheet } from '@/Components';
 import Earnings from './Components/Earnings';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Colors } from '@/Theme/Variables'
