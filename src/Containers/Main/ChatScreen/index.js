@@ -13,7 +13,9 @@ import {  useSelector } from 'react-redux'
 import database from '@react-native-firebase/database'
 import { VeroHeader } from '@/Components'
 
+
 const ChatScreen = props => {
+  
   console.log('shwoing value sin ', props)
 //   const { name, from_user, receiver_id,latestMessage,_id} = params
   const { Layout, Gutters, Fonts, Images } = useTheme()
@@ -23,14 +25,34 @@ const ChatScreen = props => {
   const [messages, setMessages] = useState([])
   const [demoMessages,setDemoMessage]= useState([])
   const [loading, setLoading] = useState(false)
-  const [purchasesChildKey, setPurchasesChildKey] = useState()
-  const [locationChildKey, setLocationChildKey] = useState()  
-  const [locationSubChildKey, setLocationSubChildKey] = useState()
+  // const [purchasedChildKey, setPurchasedChildKey] = useState()
+  const [locationsChildKey, setLocationsChildKey] = useState('')  
+  // const [locationSubChildKey, setLocationSubChildKey] = useState()
   const user = useSelector(state => state.user.user)
   const purchase_id = useSelector(state => state.user.purchase_id)
 
 
   console.log('showing values of user is',user);
+
+  useEffect(() => {
+    console.log("Locationnnnn childd key", locationsChildKey)
+    const ref = database().ref().child('purchases_location').child(locationsChildKey)
+    const listener = ref.on('value', snapshot => {
+      console.log("Locationnnnn childd key second", locationsChildKey)
+      snapshot.forEach((childSnapshot) => {
+        if(snapshot.key == locationsChildKey){
+          console.log("Child in useeefccect", childSnapshot.val())
+          if(childSnapshot.val()?.is_chat == true){
+            if(childSnapshot.val()?.user_id != user._id){
+              setMessages(childSnapshot.val()?.message)
+            }
+          }
+        }
+        });
+    })
+    return () => ref.off('value', listener)
+     
+  }, [database(), locationsChildKey])
 
   const databaseConnect = async () => {
     let purchasesChildKey = '';
@@ -60,43 +82,25 @@ const ChatScreen = props => {
       });
     console.log('purchasesChildKey: ', purchasesChildKey);
     console.log('locationChildKey: ', locationChildKey);
-
-    // if (purchasesChildKey == locationChildKey) {
-    //   await database()
-    //     .ref()
-    //     .child('purchases_location')
-    //     .child(locationChildKey)
-    //     .once('value', (snapshot) => {
-    //       snapshot.forEach((childSnapshot) => {
-    //         if (childSnapshot.key) {
-    //           locationSubChildKey = childSnapshot.key;
-    //         }
-    //       });
-    //     });
-    //   console.log('locationSubChildKey: ', locationSubChildKey);
-    //     setPurchasesChildKey(purchasesChildKey)
-    //     setLocationChildKey(locationChildKey)
-    //     setLocationSubChildKey(locationSubChildKey)
-    //   }
-      setPurchasesChildKey(purchasesChildKey)
-      setLocationChildKey(locationChildKey)
+    setLocationsChildKey(locationChildKey)
   }
 
 
     const onSend = async (message)=>{
-      await databaseConnect()
-      if (locationChildKey) {
+      
+      if (!locationsChildKey) {
+        await databaseConnect()
+      } else {
             database()
             .ref()
             .child('purchases_location')
-            .child(locationChildKey)
-            // .child(locationSubChildKey)
+            .child(locationsChildKey)
             .push({
               is_chat: true,
               message: message[0].text,
               user_id: user._id,
             })
-        }
+      }
       await setMessages(previousMessages => GiftedChat.append(previousMessages, message))
       setLoading(true)
   }
@@ -150,9 +154,9 @@ const ChatScreen = props => {
         renderSend={renderSend}
         renderAvatar={() => null}
         containerStyle={styles.containerStyle}
-        // user={{
-        //   _id: user?.id,
-        // }}
+        user={{
+          _id: user?._id,
+        }}
       />
       <View style={styles.chatMargin}></View>
     </View>

@@ -48,38 +48,66 @@ const Profile = () => {
     )
   }
 
+//   const sendFilesToServer =()=> {
+//     let formData = new FormData();
+//     const keys = Object.keys(this.files);
+//     if (!keys || !keys.length) {
+//       return this.driverDetailes.docs;
+//     }
+//     for (const key of keys) {
+//       let file: File = this.files[key];
+//       formData.append(key, file, file.name);
+//     }
+//     try {
+//       const res = await this.authService.uploadFiles(formData, this.firstFormGroup.value.mobile_number);
+//       if (res && res.meta && res.meta.status === 200) {
+//         const kys = Object.keys(res.data.data);
+//         for (const ky of kys) {
+//           this.driverDetailes.docs[ky] = res.data.data[ky];
+//         }
+//         return this.driverDetailes.docs;
+//       }
+//       return this.driverDetailes.docs;
+//     }
+//     catch (ex: any) {
+//       this.toastr.error(ex.error.meta.message, 'Error');
+//       return this.driverDetailes.docs;
+//     }
+//   }
+//   const uploadFiles = (body, id) => {
+//     let headers = new HttpHeaders()
+//     headers.append('Content-Type', 'multipart/form-data');
+//     return this.http.post(`files/${id}/temp-files`, body, { headers }).toPromise();
+// }
+
   const uploadPicture = async ()=> {
   var photo = {
-    name: imageUpload.name,
+    name: imageUpload.fileName,
     type: imageUpload.type,
     uri: imageUpload.uri.replace('file://', ''),
     };
-    //use formdata
-    var formData = new FormData(); 
-    //append created photo{} to formdata
-    formData.append('key', photo);
-    formData.append('license', photo);
-    formData.append('avatar', photo);
-    //use axios to POST
-    await axios({
-        method: 'POST',
-        url: Config.API_URL + 'files/'+ user._id +'/temp-files',
-        data: formData,
-        config: {
-          headers: {
-            Authorization: token,
-            'Content-Type': 'multipart/form-data',
-          },
-        },
-        // headers: {
-        //     'Authorization': token,
-        //     // 'Accept': 'application/json',
-        //     'Content-Type': 'multipart/form-data;'    
-        // }
-      }) 
-        .then(function (response) { console.log("Image axios Reponse",response)})
-        .catch(function (error) { console.log("Image axios Error",error.response)
-    });
+
+    console.log("Image upload", photo)
+
+  //   //use formdata
+  //   var formData = new FormData(); 
+  //   //append created photo{} to formdata
+  //   formData.append('key', photo, photo.name);
+  //   //use axios to POST
+  //   await axios({
+  //       method: 'POST',
+  //       url: Config.API_URL + 'files/'+ user._id +'/temp-files',
+  //       data: formData,
+  //       config: {
+  //         headers: {
+  //           Authorization: token,
+  //           'Content-Type': 'multipart/form-data',
+  //         },
+  //       }
+  //     }) 
+  //       .then(function (response) { console.log("Image axios Reponse",response)})
+  //       .catch(function (error) { console.log("Image axios Error",error.response)
+  //   });
   }
 
   return (
