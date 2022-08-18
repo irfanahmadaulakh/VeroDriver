@@ -12,6 +12,8 @@ import { Config } from '@/Config'
 import {  useSelector } from 'react-redux'
 import database from '@react-native-firebase/database'
 import { VeroHeader } from '@/Components'
+import { v4 as uuidv4 } from 'uuid';
+
 
 
 const ChatScreen = props => {
@@ -39,13 +41,29 @@ const ChatScreen = props => {
     const ref = database().ref().child('purchases_location').child(locationsChildKey)
     const listener = ref.on('value', snapshot => {
       console.log("Locationnnnn childd key second", locationsChildKey)
+      setMessages([]),
       snapshot.forEach((childSnapshot) => {
         if(snapshot.key == locationsChildKey){
           console.log("Child in useeefccect", childSnapshot.val())
           if(childSnapshot.val()?.is_chat == true){
-            if(childSnapshot.val()?.user_id != user._id){
-              setMessages(childSnapshot.val()?.message)
-            }
+            // if(childSnapshot.val()?.user_id != user._id){
+              // setMessages([...messages, {
+              //   text: childSnapshot.val()?.message,
+              //   user: {
+              //     _id: childSnapshot.val()?.user_id
+              //   },
+              //   createdAt: new Date(),
+              //   _id: uuidv4()
+              // }])
+              setMessages(previousMessages => [...previousMessages, {
+                  text: childSnapshot.val()?.message,
+                  user: {
+                    _id: childSnapshot.val()?.user_id
+                  },
+                  createdAt: new Date(),
+                  _id: uuidv4()
+                }])
+            // }
           }
         }
         });
@@ -87,6 +105,7 @@ const ChatScreen = props => {
 
 
     const onSend = async (message)=>{
+      console.log("Message sent",  message)
       
       if (!locationsChildKey) {
         await databaseConnect()
@@ -146,7 +165,7 @@ const ChatScreen = props => {
       <Image style={styles.avatar} source={Images.profile} />
       {/* <Text style={styles.name}>{`${'Name not found!'}`}</Text> */}
       <GiftedChat
-        messages={messages}
+        messages={messages.reverse()}
         //   textInputStyle = {{backgroundColor:'red'}}
         renderBubble={renderBubble}
         showUserAvatar={false}
@@ -155,7 +174,7 @@ const ChatScreen = props => {
         renderAvatar={() => null}
         containerStyle={styles.containerStyle}
         user={{
-          _id: user?._id,
+          _id: user._id,
         }}
       />
       <View style={styles.chatMargin}></View>

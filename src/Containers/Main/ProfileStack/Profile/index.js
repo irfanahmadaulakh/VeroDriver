@@ -86,28 +86,26 @@ const Profile = () => {
     type: imageUpload.type,
     uri: imageUpload.uri.replace('file://', ''),
     };
-
     console.log("Image upload", photo)
-
   //   //use formdata
-  //   var formData = new FormData(); 
+    var formData = new FormData(); 
   //   //append created photo{} to formdata
-  //   formData.append('key', photo, photo.name);
+    formData.append('key', photo, photo.name);
   //   //use axios to POST
-  //   await axios({
-  //       method: 'POST',
-  //       url: Config.API_URL + 'files/'+ user._id +'/temp-files',
-  //       data: formData,
-  //       config: {
-  //         headers: {
-  //           Authorization: token,
-  //           'Content-Type': 'multipart/form-data',
-  //         },
-  //       }
-  //     }) 
-  //       .then(function (response) { console.log("Image axios Reponse",response)})
-  //       .catch(function (error) { console.log("Image axios Error",error.response)
-  //   });
+    await axios({
+        method: 'POST',
+        url: Config.API_URL + 'files/'+ user._id +'/temp-files',
+        data: formData,
+        config: {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      }) 
+        .then(function (response) { console.log("Image axios Reponse",response)})
+        .catch(function (error) { console.log("Image axios Error",error.response)
+    });
   }
 
   return (
