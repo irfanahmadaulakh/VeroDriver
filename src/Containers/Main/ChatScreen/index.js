@@ -120,12 +120,12 @@ const ChatScreen = props => {
             backgroundColor: Colors.grey,
           },
           left: {
-            backgroundColor: Colors.orange,
+            backgroundColor: '#222831',
           },
         }}
         textStyle={{
           right: {
-            color: '#272727',
+            color: '#fff',
           },
           left: {
             color: '#fff',

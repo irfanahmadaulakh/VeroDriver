@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import { SafeAreaView, StatusBar } from 'react-native'
+import { Alert, SafeAreaView, StatusBar } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import { useTheme } from '@/Hooks'
@@ -9,11 +9,17 @@ import AuthStack from './Auth'
 import messaging from '@react-native-firebase/messaging';
 import { setPurchaseID } from '@/Store/Actions/user'
 import { useDispatch, useSelector } from 'react-redux'
+import { notificationManager } from '../Services/Helpers/NotificationManager'
+
 
 const Stack = createStackNavigator()
 
 // @refresh reset
+
 const ApplicationNavigator = (props) => {
+
+  let localNotify = null
+
 
   console.log("props in applications stack are", props);
 
@@ -40,11 +46,42 @@ const checkToken = async () => {
   }
 }
 
+useEffect(()=>{
+  localNotify = notificationManager
+  localNotify.configure(onRegister, onNotification, onOpenNotification)
+}, [])
+
+const onRegister = (token)=>{
+ console.log("[Notification] Registered", token)
+}
+
+const onNotification = (notify)=>{
+  console.log("[Notification] onNotification", notify)
+}
+
+const onOpenNotification = (notify)=>{
+  console.log("[Notification] onOpenNotification", notify)
+  // Alert.alert("tigardam" )
+  if(notify?.data?.item){
+    // dispatch(setPurchaseID(notify?.data?.item?.purchase_id))
+    console.log('props.naviation', props)
+  } else {
+    // dispatch(setPurchaseID(notify?.data?.purchase_id))
+  }
+}
+
 useEffect(() => {
   checkToken()
   requestUserPermission()
   const unsubscribe = messaging().onMessage(async remoteMessage => {
-    Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage))
+    localNotify.showNotification(
+      1,
+      remoteMessage?.notification?.title,
+      remoteMessage?.notification?.body,
+      remoteMessage?.data, // data
+      {}, // options
+    )
+    console.log('A new FCM message arrived!', remoteMessage)
   })
 
   // Assume a message-notification contains a "type" property in the data payload of the screen to open

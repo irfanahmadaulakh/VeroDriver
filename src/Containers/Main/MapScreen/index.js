@@ -20,6 +20,7 @@ import { setPurchaseID, setActiveStatus } from '@/Store/Actions/user'
 import axios from 'axios';
 import { WP } from '@/Theme/Responsive';
 
+
 const MapScreen = () => {
 
   const user = useSelector(state => state.user.user)
@@ -39,18 +40,16 @@ const MapScreen = () => {
   let gasArray = new Array()
   let gasMarkers = new Array()
 
-
-
-  useEffect(()=> {
-    messaging().onNotificationOpenedApp(remoteMessage => {
-      dispatch(setPurchaseID(remoteMessage?.data?.purchase_id))
-      console.log(
-        'Notification caused open from background state:',
-        remoteMessage,
-      )
-      navigateFunction()
-    })
-  })
+  // useEffect(()=> {
+  //   messaging().onNotificationOpenedApp(remoteMessage => {
+  //     dispatch(setPurchaseID(remoteMessage?.data?.purchase_id))
+  //     console.log(
+  //       'Notification caused open from background state:',
+  //       remoteMessage,
+  //     )
+  //     navigateFunction()
+  //   })
+  // })
 
   const navigateFunction = () => {
     console.log("props in mao");
