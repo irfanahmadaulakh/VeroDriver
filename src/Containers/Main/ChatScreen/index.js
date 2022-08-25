@@ -12,14 +12,13 @@ import { Config } from '@/Config'
 import {  useSelector } from 'react-redux'
 import database from '@react-native-firebase/database'
 import { VeroHeader } from '@/Components'
-import { v4 as uuidv4 } from 'uuid';
+import uuid from 'react-native-uuid';
 
 
 
 const ChatScreen = props => {
   
   console.log('shwoing value sin ', props)
-//   const { name, from_user, receiver_id,latestMessage,_id} = params
   const { Layout, Gutters, Fonts, Images } = useTheme()
   const [username, setUsername] = useState()
   const { t } = useTranslation()
@@ -27,15 +26,11 @@ const ChatScreen = props => {
   const [messages, setMessages] = useState([])
   const [demoMessages,setDemoMessage]= useState([])
   const [loading, setLoading] = useState(false)
-  // const [purchasedChildKey, setPurchasedChildKey] = useState()
   const [locationsChildKey, setLocationsChildKey] = useState('')  
-  // const [locationSubChildKey, setLocationSubChildKey] = useState()
   const user = useSelector(state => state.user.user)
   const purchase_id = useSelector(state => state.user.purchase_id)
 
-
   console.log('showing values of user is',user);
-
   useEffect(() => {
     console.log("Locationnnnn childd key", locationsChildKey)
     const ref = database().ref().child('purchases_location').child(locationsChildKey)
@@ -46,30 +41,19 @@ const ChatScreen = props => {
         if(snapshot.key == locationsChildKey){
           console.log("Child in useeefccect", childSnapshot.val())
           if(childSnapshot.val()?.is_chat == true){
-            // if(childSnapshot.val()?.user_id != user._id){
-              // setMessages([...messages, {
-              //   text: childSnapshot.val()?.message,
-              //   user: {
-              //     _id: childSnapshot.val()?.user_id
-              //   },
-              //   createdAt: new Date(),
-              //   _id: uuidv4()
-              // }])
               setMessages(previousMessages => [...previousMessages, {
                   text: childSnapshot.val()?.message,
                   user: {
                     _id: childSnapshot.val()?.user_id
                   },
                   createdAt: new Date(),
-                  _id: uuidv4()
+                  _id: uuid.v4()
                 }])
-            // }
           }
         }
         });
     })
     return () => ref.off('value', listener)
-     
   }, [database(), locationsChildKey])
 
   const databaseConnect = async () => {
