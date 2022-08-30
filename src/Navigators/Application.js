@@ -17,12 +17,7 @@ const Stack = createStackNavigator()
 // @refresh reset
 
 const ApplicationNavigator = (props) => {
-
   let localNotify = null
-
-
-  console.log("props in applications stack are", props);
-
   const dispatch = useDispatch()
 
 async function requestUserPermission() {
@@ -49,6 +44,7 @@ const checkToken = async () => {
 useEffect(()=>{
   localNotify = notificationManager
   localNotify.configure(onRegister, onNotification, onOpenNotification)
+  console.log("value of naviagtio ref", navigationRef)
 }, [])
 
 const onRegister = (token)=>{
@@ -61,12 +57,14 @@ const onNotification = (notify)=>{
 
 const onOpenNotification = (notify)=>{
   console.log("[Notification] onOpenNotification", notify)
-  // Alert.alert("tigardam" )
   if(notify?.data?.item){
-    // dispatch(setPurchaseID(notify?.data?.item?.purchase_id))
+    dispatch(setPurchaseID(notify?.data?.item?.purchase_id))
     console.log('props.naviation', props)
+    navigationRef?.navigate("TripNotification")
   } else {
-    // dispatch(setPurchaseID(notify?.data?.purchase_id))
+    dispatch(setPurchaseID(notify?.data?.purchase_id))
+    navigationRef?.navigate("TripNotification")
+
   }
 }
 

@@ -25,7 +25,9 @@ const MapScreen = () => {
 
   const user = useSelector(state => state.user.user)
   const activeStatus = useSelector(state => state.user.activeStatus)
-  console.log("Active Status", activeStatus);
+  const purchase_id = useSelector(state => state.user.purchase_id)
+
+  console.log("Active Status", purchase_id);
   
   const user_id = useSelector(state => state.user.user_id)
   const { width, height } = Dimensions.get('screen');
