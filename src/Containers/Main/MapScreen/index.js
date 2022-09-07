@@ -26,6 +26,8 @@ const MapScreen = () => {
   const user = useSelector(state => state.user.user)
   const activeStatus = useSelector(state => state.user.activeStatus)
   const purchase_id = useSelector(state => state.user.purchase_id)
+  const appState = useSelector(state => state.user.appState)
+
 
   console.log("Active Status", purchase_id);
   
@@ -42,21 +44,22 @@ const MapScreen = () => {
   let gasArray = new Array()
   let gasMarkers = new Array()
 
-  // useEffect(()=> {
-  //   messaging().onNotificationOpenedApp(remoteMessage => {
-  //     dispatch(setPurchaseID(remoteMessage?.data?.purchase_id))
-  //     console.log(
-  //       'Notification caused open from background state:',
-  //       remoteMessage,
-  //     )
-  //     navigateFunction()
-  //   })
-  // })
-
-  const navigateFunction = () => {
-    console.log("props in mao");
-    navigate("TripNotification")
-  }
+  // useEffect(() => {
+  //   console.log("App state in startup", appState)
+  //   // if (user) {
+  //     if(appState){
+  //       if(appState == Config.AppStateEnum.RIDE_ACCEPTED){
+  //         // console.log("in first", appState, Config.AppStateEnum.RIDE_ACCEPTED),
+  //         ()=> navigate("RideScreen")
+  //       } else if(appState == Config.AppStateEnum.RIDE_STARTED) {
+  //         // console.log("in second", appState, Config.AppStateEnum.RIDE_STARTED),
+  //         ()=> navigate("RideToDestination")
+  //       } else if(appState == Config.AppStateEnum.RIDE_ARRIVED) {
+  //         // console.log("in 3rd", appState, Config.AppStateEnum.RIDE_ARRIVED),
+  //         ()=> navigate("RideToPickup")
+  //       }
+  //     }
+  // }, [])
 
   useEffect(async () => {
     console.log("user here is ", user);

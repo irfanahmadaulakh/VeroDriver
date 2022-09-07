@@ -28,6 +28,13 @@ export const Config = {
     ERROR: 'error',
   },
 
+  AppStateEnum: {
+    RIDE_ACCEPTED: 'ride_accepted',
+    RIDE_STARTED: 'ride_started',
+    RIDE_ARRIVED: 'ride_arrived',
+    RIDE_ENDED: 'ride_ended'
+  },
+
   ResponseCode: {
     OK: 200,
     CREATED: 201,

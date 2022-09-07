@@ -17,6 +17,8 @@ const Stack = createStackNavigator()
 // @refresh reset
 
 const ApplicationNavigator = (props) => {
+  const user = useSelector(state => state.user.user)
+
   let localNotify = null
   const dispatch = useDispatch()
 
@@ -121,7 +123,7 @@ useEffect(() => {
       <NavigationContainer theme={NavigationTheme} ref={navigationRef}>
         <StatusBar barStyle={darkMode ? 'light-content' : 'dark-content'} />
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* {user ? 
+        {user ? 
           <Stack.Screen
             name="Main"
             component={MainNavigator}
@@ -130,18 +132,16 @@ useEffect(() => {
             }}
           />
           : 
-          <> */}
           <Stack.Screen name="Auth" component={AuthStack} />
+          }
+          {/* <Stack.Screen name="Auth" component={AuthStack} />
           <Stack.Screen
             name="Main"
             component={MainNavigator}
             options={{
               animationEnabled: false,
             }}
-          />
-          {/* </>
-          } */}
-          
+          /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>

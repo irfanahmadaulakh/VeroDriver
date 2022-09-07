@@ -20,6 +20,7 @@ import FullScreenHeader from './Components/FullScreenHeader';
 import { getCameraPicture } from '@/Services/Helpers'
 import SignatureModal from './Components/SignatureModal';
 import TopHeaderExchange from './Components/TopHeaderExchange';
+import { setAppState } from '../../../Store/Actions';
 
 
 // import database from '@react-native-firebase/database';
@@ -41,6 +42,8 @@ const RideToPickup = (props) => {
   const { Layout, Images } = useTheme()
   const GOOGLE_MAPS_APIKEY = 'AIzaSyC6Vo_6ohnkLyGIw2IPmZka0TarRaeWJ2g';
   const { t } = useTranslation()
+  const dispatch = useDispatch()
+
   const [headers, setHeaders] = useState(true)
   const [serviceType, setServiceType] = useState()
   const [pickupFrom, setPickupFrom] = useState()
@@ -377,6 +380,7 @@ const RideToPickup = (props) => {
     .jsonParams(params)
     .response(response => {
       console.log("Response ", response)
+      dispatch(setAppState(Config.AppStateEnum.RIDE_ENDED))
       props.navigation.pop(4)
      })
     .error(error => {

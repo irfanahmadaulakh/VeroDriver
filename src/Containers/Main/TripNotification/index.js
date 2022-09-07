@@ -9,7 +9,7 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import RequestHeader from './Components/RequestHeader';
 import BottomHeader from './Components/BottomHeader';
 import { useDispatch, useSelector } from 'react-redux'
-import { setRideDetails, setItemDetails } from '@/Store/Actions'
+import { setRideDetails, setItemDetails, setAppState } from '@/Store/Actions'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { useEffect, useState } from 'react';
 import { APIRequest } from '@/Services/ApiRequest'
@@ -18,7 +18,6 @@ import { Config } from '@/Config'
 import { navigate, goBack } from '@/Navigators/utils';
 import FullScreenBackButton from './Components/FullScreenBackButton'
 import RequestHeaderFood from './Components/RequestHeaderFood';
-import { WP } from '../../../Theme/Responsive';
 import RequestHeaderPurchase from './Components/RequestHeaderPurchase';
 
 const TripNotification = (props) => {
@@ -201,6 +200,7 @@ const TripNotification = (props) => {
         itemReturnDetails: itemReturnDetails,
       }
       dispatch(setRideDetails(data))
+      dispatch(setAppState(Config.AppStateEnum.RIDE_ACCEPTED))
       let params= {
         purchase_id: purchase_id
       }

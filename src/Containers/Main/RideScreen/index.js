@@ -26,6 +26,7 @@ import TopHeaderPickup from './Components/TopHeaderPickup';
 import TopHeaderExchange from './Components/TopHeaderExchange';
 import PackagePickupModal from './Components/PackagePickupModal';
 import ExchangeReturnModal from './Components/ExchangeReturnModal';
+import { setAppState, setStartTime } from '../../../Store/Actions';
 
 // import database from '@react-native-firebase/database';
 
@@ -78,6 +79,8 @@ const RideScreen = (props) => {
   const [itemsData, setItemsData] = useState([])
   const [exchangeModalVisible, setExchangeModalVisible] = useState(false);
   const [startCoordinate, setStartCoordinates] = useState()
+  const dispatch = useDispatch()
+
 
   const { width, height } = Dimensions.get('screen');
 
@@ -381,7 +384,9 @@ const RideScreen = (props) => {
     .jsonParams(params)
     .response(response => {
       console.log("Response ", response),
-      navigate("RideToDestination", startTime={startTime})
+      dispatch(setAppState(Config.AppStateEnum.RIDE_STARTED))
+      navigate("RideToDestination")
+      dispatch(setStartTime(startTime))
      })
     .error(error => {
       console.log('Showing error', error)

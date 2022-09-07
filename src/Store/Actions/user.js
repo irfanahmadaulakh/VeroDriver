@@ -31,5 +31,15 @@ export const setUserServiceType = type => ({
   type: ActionTypes.USER_SERVICE_TYPES,
   userServiceTypes: type,
 })
+export const setAppState = appState => ({
+  type: ActionTypes.APP_STATE,
+  appState: appState,
+})
+
+export const setStartTime = start => ({
+  type: ActionTypes.START_TIME,
+  startTime: start,
+})
+
 
 

@@ -24,6 +24,7 @@ import TopHeaderPickup from './Components/TopHeaderPickup';
 import SignatureModal from './Components/SignatureModal';
 import TopHeaderExchange from './Components/TopHeaderExchange';
 import ExchangeReturnModal from './Components/ExchangeReturnModal';
+import { setAppState } from '../../../Store/Actions';
 
 
 // import database from '@react-native-firebase/database';
@@ -32,10 +33,7 @@ const db = firebase.database()
 let imageUpload;
 
 const RideToDestination = (props) => {
-  
-  const { startTime } = props?.route?.params
-  console.log(" propss in ride destination", startTime);
-
+    console.log(" propss in ride destination", startTime);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
 
@@ -43,6 +41,8 @@ const RideToDestination = (props) => {
   const purchase_id = useSelector(state => state.user.purchase_id)
   const token = useSelector(state => state.user.token)
   const ItemDetails = useSelector(state => state.user.itemDetails)
+  const startTime = useSelector(state => state.user.startTime)
+
 
 
   const { name, pickup, service, service_type,  status, pickupLocation, dropLocation, dropOff, finalDistance} = ride
@@ -50,6 +50,7 @@ const RideToDestination = (props) => {
   const { Layout, Images } = useTheme()
   const GOOGLE_MAPS_APIKEY = 'AIzaSyC6Vo_6ohnkLyGIw2IPmZka0TarRaeWJ2g';
   const { t } = useTranslation()
+  const dispatch = useDispatch()
   const [headers, setHeaders] = useState(true)
   const [serviceType, setServiceType] = useState()
   const [pickupFrom, setPickupFrom] = useState()
@@ -389,6 +390,7 @@ const RideToDestination = (props) => {
     .jsonParams(params)
     .response(response => {
       console.log("Response ", response)
+      dispatch(setAppState(Config.AppStateEnum.RIDE_ENDED))
       props.navigation.pop(3)
      })
     .error(error => {
@@ -399,8 +401,8 @@ const RideToDestination = (props) => {
   }
 
   const fareCalculation = () => {
-    let elapseTime = new Date() - startTime;
-    console.log(" params", startTime, " new date is ", new Date(), "elapse", );
+    let elapseTime = new Date() - new Date(startTime);
+    console.log(" params", startTime, " new date is ", new Date(), "elapse", elapseTime);
     let params={
       is_estimated: true,
       purchase_amount: amount ? amount: 0,
@@ -434,6 +436,7 @@ const RideToDestination = (props) => {
     .jsonParams(params)
     .response(response => {
       console.log("Response ", response)
+      dispatch(setAppState(Config.AppStateEnum.RIDE_ARRIVED))
       navigate("RideToPickup" )
      })
     .error(error => {

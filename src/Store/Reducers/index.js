@@ -6,7 +6,9 @@ const User = (state = { user: null,
   rideDetails: null, 
   itemDetails: null,
   activeStatus: null,
-  userServiceTypes: null }, action) => {
+  userServiceTypes: null,
+  appState: null,
+  startTime: null }, action) => {
   console.log('showing values of actions here', action)
   switch (action.type) {
     case Actions.USER:
@@ -40,6 +42,16 @@ const User = (state = { user: null,
           return {
             ...state,
             userServiceTypes: action.userServiceTypes,
+          }
+        case Actions.APP_STATE:
+          return {
+            ...state,
+            appState: action.appState,
+          }
+        case Actions.START_TIME:
+          return {
+            ...state,
+            startTime: action.startTime,
           }
     default
     :
