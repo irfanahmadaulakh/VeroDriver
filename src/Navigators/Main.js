@@ -28,17 +28,18 @@ const MainNavigator = (props) => {
           props.navigation?.navigate("RideToDestination")
         } else if(appState == Config.AppStateEnum.RIDE_ARRIVED) {
           props.navigation?.navigate("RideToPickup")
-        } else if(appState == Config.AppStateEnum.RIDE_ENDED) {
-          props.navigation?.replace('MapScreen')
-        }
-      } else {
-      props.navigation.replace('MapScreen')
-      }
+        } 
+        // else if(appState == Config.AppStateEnum.RIDE_ENDED) {
+        //   props.navigation?.replace('MapScreen')
+        // }
+      } 
+      // else {
+      // props.navigation.replace('MapScreen')
+      // }
     }
   }, [])
 
 
-  console.log("propsss",props, "props nvigation", props?.navigation)
   return (
     <Stack.Navigator headerMode={'none'}>
       <Stack.Screen name="MapScreen" component={MapScreen} />
