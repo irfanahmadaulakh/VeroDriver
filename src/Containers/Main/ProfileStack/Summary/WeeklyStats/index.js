@@ -18,7 +18,7 @@ const WeeklyStats = () => {
     const getStats = () =>{
         new APIRequest.Builder()
             .get()
-            .reqURL(`driver/${user_id}/stats?includeSummary=true`)
+            .reqURL(`driver/${user_id}/stats?toDate=2022-09-28&fromDate=2022-05-23`)
             .jsonParams()
             .response(response => {
             console.log("Response ", response)
@@ -38,7 +38,7 @@ const WeeklyStats = () => {
         <View style={Layout.fill}>
            <WeeklyDetails
                 totalStats = {totalStats}
-                weeklyStats = {weeklyStats}
+                dailyStats = {weeklyStats}
            />
         </View>
     );

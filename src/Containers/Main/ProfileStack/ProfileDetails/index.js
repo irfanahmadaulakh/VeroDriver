@@ -70,8 +70,8 @@ const ProfileDetails = (props) => {
       <SettingsItems onPress={pressHome} icon="home-sharp" text={t("home")}/>
       <SettingsItems onPress={pressRideHistory} icon="md-car-outline" text={t("rideHistory")}/>
       <SettingsItems onPress={pressSummary} icon="ios-document-text-outline" text={t("summary")}/>
-      <SettingsItems icon="star" text={t("subscription")}/>
-      <SettingsItems icon="notifications-sharp" text={t("notification")}/>
+      {/* <SettingsItems icon="star" text={t("subscription")}/> */}
+      {/* <SettingsItems icon="notifications-sharp" text={t("notification")}/> */}
       <SettingsItems onPress={pressSettings} icon="settings-sharp" text={t("settings")}/>
       <SettingsItems onPress={showAlert} icon="power" text={t("logout")}/>
       </ScrollView>

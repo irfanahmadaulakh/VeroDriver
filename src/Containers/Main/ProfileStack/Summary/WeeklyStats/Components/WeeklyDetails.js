@@ -1,40 +1,51 @@
-import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import { Colors } from '@/Theme/Variables';
-import { WP } from '@/Theme/Responsive';
+import React from 'react'
+import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import { Colors } from '@/Theme/Variables'
+import { WP } from '@/Theme/Responsive'
 import { useTheme } from '@/Hooks'
-import { VeroBarChart } from '@/Components';
+import { VeroBarChart } from '@/Components'
+import moment from 'moment'
+import Trips from './Trips'
 
-const WeeklyDetails = (props) => {
-  console.log("props in weekly summary", props);
-  const { totalStats, weeklyStats } = props
+const WeeklyDetails = props => {
+  console.log('props in weekly summary', props)
+  const { totalStats, dailyStats } = props
   const { Layout } = useTheme()
+  const date = new Date()
   return (
     <ScrollView>
       <View style={styles.container}>
-           <Text style={styles.textGrey}>01 Mar 22 at 10:47 am</Text>
-           <Text style={styles.textBold}>$<Text style={{color:'black', fontSize: WP('8')}}>{totalStats?.trips}</Text></Text>
-           {/* <VeroBarChart/> */}
-           <View style={styles.divider}></View>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <View style={styles.boxContainer}>
+        <Text style={styles.textGrey}>
+          {moment(date)?.format('ddd, DD MMMM YYYY')}
+        </Text>
+        <Text style={styles.textBold}>
+          $
+          <Text style={{ color: 'black', fontSize: WP('8') }}>
+            {totalStats?.amount}
+          </Text>
+        </Text>
+        <VeroBarChart dailyStats={dailyStats} />
+        <View style={styles.divider}></View>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.boxContainer}>
             <Text style={Layout.textNumbers}>{totalStats?.trips}</Text>
             <Text style={Layout.text}>Trips</Text>
-        </View>
-        <View style={Layout.dividerVertical}></View>
-        <View style={styles.boxContainer}>
-        <Text style={Layout.textNumbers}>{totalStats?.time}</Text>
+          </View>
+          <View style={Layout.dividerVertical}></View>
+          <View style={styles.boxContainer}>
+            <Text style={Layout.textNumbers}>{totalStats?.time}</Text>
             <Text style={Layout.text}>Online Hours</Text>
-        </View>
-        <View style={Layout.dividerVertical}></View>
-        <View style={styles.boxContainer}>
-        <Text style={Layout.textNumbers}>${totalStats?.amount}</Text>
+          </View>
+          <View style={Layout.dividerVertical}></View>
+          <View style={styles.boxContainer}>
+            <Text style={Layout.textNumbers}>${totalStats?.amount}</Text>
             <Text style={Layout.text}>Cash Trip</Text>
+          </View>
         </View>
-        </View>
-      </View> 
+      </View>
       <Text style={styles.headText}>TRIPS</Text>
-      <View style={styles.container}>
+      <Trips dailyStats={dailyStats} />
+      {/* <View style={styles.container}>
       <View style={styles.rowView}>
         <Text style={styles.text}>Trip fares</Text><Text style={styles.text2}>$40.25</Text>
         </View>
@@ -56,76 +67,75 @@ const WeeklyDetails = (props) => {
         <View style={styles.divider3}></View>
         <View style={styles.rowView}>
         <Text style={[styles.text, {color: Colors.orange, fontWeight: 'bold'}]}>Your payment</Text><Text style={[styles.text2, {color: Colors.orange, fontWeight: 'bold'}]}>$515.15</Text>
-        </View>
-        
-      </View>
+        </View> */}
+
+      {/* </View> */}
     </ScrollView>
-  );
-  
+  )
 }
 
 const styles = StyleSheet.create({
-    container:{
-        backgroundColor: Colors.white,
-        marginTop: WP('1')
-    },
-    text:{
-      fontSize: WP('4.5'), 
-      marginVertical: WP('1'),
-      margin: WP('5')
-    }, 
-    text2:{
-      fontSize: WP('4.5'), 
-      marginVertical: WP('1'),
-      right: WP('5'),
-      position: 'absolute'
-    }, 
-    textBold: {
-      fontSize: WP('6'), 
-      fontWeight: 'bold',
-      color: Colors.orange,
-      marginTop: WP('1'),
-      textAlign: 'center'
-    },
-    textGrey:{
-      fontSize: WP('4'), 
-      color: Colors.black,
-      marginTop: WP('8'),
-      textAlign: 'center'
-    },
-    divider: {
-      borderWidth: WP(0.1),
-      marginTop: WP('10'),
-      width: WP('100'),
-      borderColor: 'grey'
+  container: {
+    backgroundColor: Colors.white,
+    marginTop: WP('1'),
+  },
+  text: {
+    fontSize: WP('4.5'),
+    marginVertical: WP('1'),
+    margin: WP('5'),
+  },
+  text2: {
+    fontSize: WP('4.5'),
+    marginVertical: WP('1'),
+    right: WP('5'),
+    position: 'absolute',
+  },
+  textBold: {
+    fontSize: WP('6'),
+    fontWeight: 'bold',
+    color: Colors.orange,
+    marginTop: WP('1'),
+    textAlign: 'center',
+  },
+  textGrey: {
+    fontSize: WP('4'),
+    color: Colors.black,
+    marginTop: WP('8'),
+    textAlign: 'center',
+  },
+  divider: {
+    borderWidth: WP(0.1),
+    marginTop: WP('10'),
+    width: WP('100'),
+    borderColor: 'grey',
   },
   divider2: {
     borderWidth: WP(0.1),
     width: WP('100'),
-    borderColor: 'grey'
-},
-divider3: {
-  borderWidth: WP(0.1),
-  width: WP('100'),
-  marginTop: WP('4'),
-  borderColor: 'grey'
-},
+    borderColor: 'grey',
+  },
+  divider3: {
+    borderWidth: WP(0.1),
+    width: WP('100'),
+    marginTop: WP('4'),
+    borderColor: 'grey',
+  },
   boxContainer: {
     width: WP('33'),
     justifyContent: 'center',
-    alignItems: 'center'
-},
-headText:{
-  fontSize: WP('4.5'),
-  fontWeight: 'bold',
-  color: Colors.black,
-  marginTop: WP('5'),
-  marginLeft: WP('5')
-},
-rowView:{
-  flexDirection: 'row', 
-  marginTop: WP('3')
-}
+    alignItems: 'center',
+  },
+  headText: {
+    fontSize: WP('4.5'),
+    fontWeight: 'bold',
+    color: Colors.black,
+    marginTop: WP('5'),
+    marginLeft: WP('5'),
+  },
+  rowView: {
+    flexDirection: 'row',
+    marginTop: WP('3'),
+  },
 })
 
-export default WeeklyDetails;
+export default WeeklyDetails
