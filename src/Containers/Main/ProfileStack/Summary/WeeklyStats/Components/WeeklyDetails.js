@@ -1,11 +1,19 @@
 import React from 'react'
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Button,
+  Switch,
+} from 'react-native'
 import { Colors } from '@/Theme/Variables'
 import { WP } from '@/Theme/Responsive'
 import { useTheme } from '@/Hooks'
 import { VeroBarChart } from '@/Components'
 import moment from 'moment'
 import Trips from './Trips'
+import VeroDatePicker from '@/Components/VeroDatePicker'
 
 const WeeklyDetails = props => {
   console.log('props in weekly summary', props)
@@ -24,7 +32,36 @@ const WeeklyDetails = props => {
             {totalStats?.amount}
           </Text>
         </Text>
-        <VeroBarChart dailyStats={dailyStats} />
+        <VeroBarChart dailyStats={dailyStats} switchChart={props.value} />
+        <View style={styles.datePickerContainer}>
+          <Text style={styles.dateText}>Select Date: </Text>
+          <VeroDatePicker
+            date={props.fromDate}
+            onDateChange={props.onFromDateChange}
+          />
+          <VeroDatePicker
+            date={props.toDate}
+            onDateChange={props.onToDateChange}
+          />
+          <Button
+            title="Submit"
+            onPress={() => props.onSubmitPress()}
+            color={Colors.orange}
+          />
+        </View>
+        <View style={styles.switchContainer}>
+          <Text style={styles.dateText}>Switch Chart: </Text>
+          <Text> Trips </Text>
+
+          <Switch
+            trackColor={{ false: '#FC8724', true: '#FC8724' }}
+            thumbColor={'#f4f3f4'}
+            ios_backgroundColor="#FC8724"
+            onValueChange={props.onValueChange}
+            value={props.value}
+          />
+          <Text> Amount </Text>
+        </View>
         <View style={styles.divider}></View>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <View style={styles.boxContainer}>
@@ -79,6 +116,25 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     marginTop: WP('1'),
   },
+  datePickerContainer: {
+    marginTop: WP('10'),
+    flexDirection: 'row',
+    alignItems: 'center',
+    // width: WP('80'),
+    marginLeft: WP('2'),
+  },
+  switchContainer: {
+    marginTop: WP('2'),
+    flexDirection: 'row',
+    marginLeft: WP('2'),
+    alignItems: 'center',
+    // alignSelf: 'center',
+  },
+  dateText: {
+    fontSize: WP('4'),
+    fontWeight: 'bold',
+    color: Colors.black,
+  },
   text: {
     fontSize: WP('4.5'),
     marginVertical: WP('1'),
@@ -105,7 +161,7 @@ const styles = StyleSheet.create({
   },
   divider: {
     borderWidth: WP(0.1),
-    marginTop: WP('10'),
+    marginTop: WP('5'),
     width: WP('100'),
     borderColor: 'grey',
   },
