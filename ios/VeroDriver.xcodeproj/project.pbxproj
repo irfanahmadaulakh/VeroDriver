@@ -14,9 +14,9 @@
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* VeroDriverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* VeroDriverTests.m */; };
+		2F2A21ED2954363C0057D2AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F2A21EC2954363C0057D2AA /* GoogleService-Info.plist */; };
 		2F3B22072808F76300D39BC7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2F3B2222280E41BE00D39BC7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3B2221280E41BE00D39BC7 /* MapKit.framework */; };
-		2F5A5D5E275CD1F600210058 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F5A5D5D275CD1EB00210058 /* GoogleService-Info.plist */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		833F2006FE004CFBA319C9F2 /* libPods-VeroDriver.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE8F60935CC7F1EA8FB7E0E /* libPods-VeroDriver.a */; };
 /* End PBXBuildFile section */
@@ -57,9 +57,9 @@
 		2150EBC8901A4380B56085C1 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* VeroDriver-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VeroDriver-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* VeroDriver-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "VeroDriver-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F2A21EC2954363C0057D2AA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F3B22102808FADC00D39BC7 /* VeroDriver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = VeroDriver.entitlements; path = VeroDriver/VeroDriver.entitlements; sourceTree = "<group>"; };
 		2F3B2221280E41BE00D39BC7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		2F5A5D5D275CD1EB00210058 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F9E780CE724C60CB827C553 /* Pods-VeroDriver-VeroDriverTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VeroDriver-VeroDriverTests.debug.xcconfig"; path = "Target Support Files/Pods-VeroDriver-VeroDriverTests/Pods-VeroDriver-VeroDriverTests.debug.xcconfig"; sourceTree = "<group>"; };
 		36A05A21F06948FAB906FF43 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		3B611A2DC6C74BA7823C3174 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
@@ -181,7 +181,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				2F5A5D5D275CD1EB00210058 /* GoogleService-Info.plist */,
+				2F2A21EC2954363C0057D2AA /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* VeroDriver */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* VeroDriverTests */,
@@ -375,7 +375,7 @@
 			files = (
 				2F3B22072808F76300D39BC7 /* Images.xcassets in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				2F5A5D5E275CD1F600210058 /* GoogleService-Info.plist in Resources */,
+				2F2A21ED2954363C0057D2AA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
